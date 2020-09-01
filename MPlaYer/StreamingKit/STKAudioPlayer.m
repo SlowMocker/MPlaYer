@@ -2907,6 +2907,7 @@ static OSStatus OutputRenderCallback(void* inRefCon, AudioUnitRenderActionFlags*
     
     BOOL waitForBuffer = NO;
 	BOOL muted = audioPlayer->muted;
+    
     AudioBuffer* audioBuffer = audioPlayer->pcmAudioBuffer;
     UInt32 frameSizeInBytes = audioPlayer->pcmBufferFrameSizeInBytes;
     UInt32 used = audioPlayer->pcmBufferUsedFrameCount;
@@ -2981,7 +2982,7 @@ static OSStatus OutputRenderCallback(void* inRefCon, AudioUnitRenderActionFlags*
         if (end > start)
         {
             UInt32 framesToCopy = MIN(inNumberFrames, used);
-            
+#pragma mark - 正常填充 ioData PCM AudioBuffer
             ioData->mBuffers[0].mNumberChannels = 2;
             ioData->mBuffers[0].mDataByteSize = frameSizeInBytes * framesToCopy;
 			

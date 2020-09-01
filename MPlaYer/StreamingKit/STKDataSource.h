@@ -39,6 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class STKDataSource;
 
+// data source 对外回调信息
 @protocol STKDataSourceDelegate<NSObject>
 -(void) dataSourceDataAvailable:(STKDataSource*)dataSource;
 -(void) dataSourceErrorOccured:(STKDataSource*)dataSource;
@@ -48,6 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface STKDataSource : NSObject
 
+// data source 信息
 @property (readonly) BOOL supportsSeek;
 @property (readonly) SInt64 position;
 @property (readonly) SInt64 length;
@@ -56,6 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readwrite, unsafe_unretained, nullable) id<STKDataSourceDelegate> delegate;
 @property (nonatomic, strong, nullable) NSURL *recordToFileUrl;
 
+// data source 能力
 -(BOOL) registerForEvents:(NSRunLoop*)runLoop;
 -(void) unregisterForEvents;
 -(void) close;

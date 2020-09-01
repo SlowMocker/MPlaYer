@@ -46,6 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface STKCoreFoundationDataSource : STKDataSource
 {
 @public
+    // 流读取指针
     CFReadStreamRef stream;
 @protected
     BOOL isInErrorState;

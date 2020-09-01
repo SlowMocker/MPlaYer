@@ -107,6 +107,7 @@ STKAudioPlayerOptions;
 
 #define STK_DISABLE_BUFFER (0xffffffff)
 
+/// PCM 帧拦截回调
 typedef void(^STKFrameFilter)(UInt32 channelsPerFrame, UInt32 bytesPerFrame, UInt32 frameCount, void* frames);
 
 @interface STKFrameFilterEntry : NSObject
@@ -156,8 +157,10 @@ typedef void(^STKFrameFilter)(UInt32 channelsPerFrame, UInt32 bytesPerFrame, UIn
 // Gets or sets the playback overlap (default is 8.0)
 @property(readwrite) float overlap;
 /// Enables or disables peak and average decibel meteting
+/// 是否允许峰值和平均分贝计算
 @property (readwrite) BOOL meteringEnabled;
 /// Enables or disables the EQ
+/// 是否允许均衡器
 @property (readwrite) BOOL equalizerEnabled;
 /// Returns an array of STKFrameFilterEntry objects representing the filters currently in use
 @property (readonly, nullable) NSArray* frameFilters;
@@ -183,6 +186,7 @@ typedef void(^STKFrameFilter)(UInt32 channelsPerFrame, UInt32 bytesPerFrame, UIn
 +(STKDataSource*) dataSourceFromURL:(NSURL*)url;
 
 /// Returns canonical audio format used by STKFrameFilter blocks.
+/// 返回最简洁的 asbd
 +(AudioStreamBasicDescription)canonicalAudioStreamBasicDescription;
 
 /// Initializes a new STKAudioPlayer with the default options
@@ -270,13 +274,16 @@ typedef void(^STKFrameFilter)(UInt32 channelsPerFrame, UInt32 bytesPerFrame, UIn
 
 /// Reads the peak power in decibals for the given channel (0 or 1).
 /// Return values are between -60 (low) and 0 (high).
+/// 返回某个 channel 的分贝峰值
 -(float) peakPowerInDecibelsForChannel:(NSUInteger)channelNumber;
 
 /// Reads the average power in decibals for the given channel (0 or 1)
 /// Return values are between -60 (low) and 0 (high).
+/// 返回某个 channel 的分贝平均值
 -(float) averagePowerInDecibelsForChannel:(NSUInteger)channelNumber;
 
-/// Sets the gain value (from -96 low to +24 high) for an equalizer band (0 based index)
+/// Sets the gain value (from -96 low to +24 high) for an equalizer band（均衡器频带） (0 based index)
+/// 设置均衡器频带的增益值
 -(void) setGain:(float)gain forEqualizerBand:(int)bandIndex;
 
 @end

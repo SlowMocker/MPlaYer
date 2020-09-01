@@ -34,6 +34,7 @@
 
 #import "STKCoreFoundationDataSource.h"
 
+// 流读取相关信息（状态信息）回调
 static void ReadStreamCallbackProc(CFReadStreamRef stream, CFStreamEventType eventType, void* inClientInfo)
 {
 	STKCoreFoundationDataSource* datasource = (__bridge STKCoreFoundationDataSource*)inClientInfo;
