@@ -7,8 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AudioToolbox/AudioToolbox.h>
 
+NS_ASSUME_NONNULL_BEGIN
 @interface MPlaYer : NSObject
-- (void) fetchLiveStream:(NSURL *)url
-                 handler:(void (^)(UInt32 channelsPerFrame, UInt32 bytesPerFrame, UInt32 frameCount, void * _Nonnull frames))handler;
+
+/// PCM 数据独立回调
+@property (nonatomic , copy) void (^pcmCallback)(AudioBuffer ioData);
+/// 播放器状态回调
+@property (nonatomic , copy) void (^playerStatusCallback)(void);
+
+/// 播放
+- (void) play:(NSURL *)url;
+/// 暂停
+- (void) pasue;
+/// 停止
+- (void) stop;
 @end
+NS_ASSUME_NONNULL_END

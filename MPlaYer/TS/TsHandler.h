@@ -10,18 +10,18 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class TSEngine;
-@protocol TSEngineProtocol <NSObject>
+@class TsHandler;
+@protocol TsHandlerProtocol <NSObject>
 
-- (void) tsEngine:(TSEngine *)engine didReceiveNewAudioPath:(NSURL *)url;
+- (void) tsHandler:(TsHandler *)engine didReceiveNewAudioPath:(NSURL *)url;
 
 @end
 
-@interface TSEngine : NSObject
+@interface TsHandler : NSObject
 // 每次设置都会自动 flush
 @property (nonatomic , strong) NSURL *m3u8URL;
 
-@property (nonatomic , weak) id<TSEngineProtocol> delegate;
+@property (nonatomic , weak) id<TsHandlerProtocol> delegate;
 
 - (void) start;
 

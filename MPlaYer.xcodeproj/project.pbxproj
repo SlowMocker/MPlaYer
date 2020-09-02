@@ -35,7 +35,7 @@
 		608AA27B24EBC246009A90DF /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 608AA27024EBC246009A90DF /* AFURLRequestSerialization.m */; };
 		608AA27C24EBC246009A90DF /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 608AA27224EBC246009A90DF /* AFNetworkReachabilityManager.m */; };
 		608AA27D24EBC246009A90DF /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 608AA27324EBC246009A90DF /* AFSecurityPolicy.m */; };
-		608AA28124EBC256009A90DF /* TSEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 608AA28024EBC256009A90DF /* TSEngine.m */; };
+		608AA28124EBC256009A90DF /* TsHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 608AA28024EBC256009A90DF /* TsHandler.m */; };
 		608AA2D224ECD419009A90DF /* Error.h in Headers */ = {isa = PBXBuildFile; fileRef = 608AA23924EBA27D009A90DF /* Error.h */; platformFilter = ios; settings = {ATTRIBUTES = (Public, ); }; };
 		608AA2D324ECD419009A90DF /* MPlaYer.h in Headers */ = {isa = PBXBuildFile; fileRef = 6070027624EA7E0F005EB7AD /* MPlaYer.h */; platformFilter = ios; settings = {ATTRIBUTES = (Public, ); }; };
 		608AA2D924ECD6AF009A90DF /* AFSecurityPolicy.h in Headers */ = {isa = PBXBuildFile; fileRef = 608AA26824EBC246009A90DF /* AFSecurityPolicy.h */; };
@@ -45,7 +45,7 @@
 		608AA2DD24ECD6AF009A90DF /* AFURLResponseSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 608AA26E24EBC246009A90DF /* AFURLResponseSerialization.h */; };
 		608AA2DE24ECD6AF009A90DF /* AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 608AA27124EBC246009A90DF /* AFNetworking.h */; };
 		608AA2DF24ECD6AF009A90DF /* AFHTTPSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 608AA27424EBC246009A90DF /* AFHTTPSessionManager.h */; };
-		608AA2E124ECD6AF009A90DF /* TSEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 608AA27F24EBC256009A90DF /* TSEngine.h */; };
+		608AA2E124ECD6AF009A90DF /* TsHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 608AA27F24EBC256009A90DF /* TsHandler.h */; };
 		608AA2E224ECD6AF009A90DF /* NSMutableArray+STKAudioPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 608AA24424EBC02A009A90DF /* NSMutableArray+STKAudioPlayer.h */; };
 		608AA2E324ECD6AF009A90DF /* STKAudioPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 608AA24024EBC02A009A90DF /* STKAudioPlayer.h */; };
 		608AA2E424ECD6AF009A90DF /* STKAutoRecoveringHTTPDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 608AA23E24EBC02A009A90DF /* STKAutoRecoveringHTTPDataSource.h */; };
@@ -127,8 +127,8 @@
 		608AA27224EBC246009A90DF /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
 		608AA27324EBC246009A90DF /* AFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
 		608AA27424EBC246009A90DF /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
-		608AA27F24EBC256009A90DF /* TSEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSEngine.h; sourceTree = "<group>"; };
-		608AA28024EBC256009A90DF /* TSEngine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSEngine.m; sourceTree = "<group>"; };
+		608AA27F24EBC256009A90DF /* TsHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TsHandler.h; sourceTree = "<group>"; };
+		608AA28024EBC256009A90DF /* TsHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TsHandler.m; sourceTree = "<group>"; };
 		608AA2F224ECF289009A90DF /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
 		60E27A4E24EE784F007DC020 /* M3U8Parser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = M3U8Parser.h; sourceTree = "<group>"; };
 		60E27A4F24EE784F007DC020 /* M3U8Parser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = M3U8Parser.m; sourceTree = "<group>"; };
@@ -240,8 +240,8 @@
 			children = (
 				608AA25C24EBC246009A90DF /* DemuxTS */,
 				608AA26524EBC246009A90DF /* DownloaderTS */,
-				608AA27F24EBC256009A90DF /* TSEngine.h */,
-				608AA28024EBC256009A90DF /* TSEngine.m */,
+				608AA27F24EBC256009A90DF /* TsHandler.h */,
+				608AA28024EBC256009A90DF /* TsHandler.m */,
 			);
 			path = TS;
 			sourceTree = "<group>";
@@ -311,7 +311,7 @@
 				608AA2DE24ECD6AF009A90DF /* AFNetworking.h in Headers */,
 				608AA2DF24ECD6AF009A90DF /* AFHTTPSessionManager.h in Headers */,
 				603D234124EEA22400C7826C /* common.h in Headers */,
-				608AA2E124ECD6AF009A90DF /* TSEngine.h in Headers */,
+				608AA2E124ECD6AF009A90DF /* TsHandler.h in Headers */,
 				608AA2E224ECD6AF009A90DF /* NSMutableArray+STKAudioPlayer.h in Headers */,
 				608AA2E324ECD6AF009A90DF /* STKAudioPlayer.h in Headers */,
 				608AA2E424ECD6AF009A90DF /* STKAutoRecoveringHTTPDataSource.h in Headers */,
@@ -388,7 +388,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				608AA28124EBC256009A90DF /* TSEngine.m in Sources */,
+				608AA28124EBC256009A90DF /* TsHandler.m in Sources */,
 				608AA25924EBC02B009A90DF /* STKDataSource.m in Sources */,
 				608AA25624EBC02B009A90DF /* STKAutoRecoveringHTTPDataSource.m in Sources */,
 				603D233524EE92E100C7826C /* LocalCacheHandler.m in Sources */,

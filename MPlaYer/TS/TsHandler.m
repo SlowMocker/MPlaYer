@@ -6,17 +6,16 @@
 //  Copyright © 2020 吴文豪. All rights reserved.
 //
 
-#import "TSEngine.h"
+#import "TsHandler.h"
 #import "M3U8Parser.h"
 #import "TsDemuxer.h"
 #import "LocalCacheHandler.h"
 
 
-@interface TSEngine()
+@interface TsHandler()
 
 // 切换 m3u8 路径时，清空所有数据
 - (void) flush;
-
 
 @property (nonatomic , strong) NSOperationQueue *opQueue;
 // 缓存的 ts net url list
@@ -28,7 +27,7 @@
 
 @end
 
-@implementation TSEngine
+@implementation TsHandler
 
 - (void) start {
 
@@ -48,8 +47,8 @@
                                           handler:^(NSURL * _Nonnull aacOrMp3URL, NSURL * _Nonnull h264URL, Error * _Nonnull error) {
 
                             if ([error isSuccess]) {
-                                if ([self.delegate respondsToSelector:@selector(tsEngine:didReceiveNewAudioPath:)]) {
-                                    [self.delegate tsEngine:self didReceiveNewAudioPath:aacOrMp3URL];
+                                if ([self.delegate respondsToSelector:@selector(tsHandler:didReceiveNewAudioPath:)]) {
+                                    [self.delegate tsHandler:self didReceiveNewAudioPath:aacOrMp3URL];
                                 }
                                 [self cacheAACLocalURL:aacOrMp3URL];
                             }
