@@ -2191,7 +2191,12 @@ static BOOL GetHardwareCodecClassDesc(UInt32 formatId, AudioClassDescription* cl
 {
     OSStatus status;
     
-    CHECK_STATUS_AND_RETURN(AUGraphAddNode(audioGraph, &playbackRateUnitDescription, &playbackRateNode));
+    AudioComponentDescription descT = {0};
+    descT.componentType = playbackRateUnitDescription.componentType; // kAudioUnitType_FormatConverter
+    descT.componentSubType = kAudioUnitSubType_AUConverter; // kAudioUnitSubType_AUiPodTimeOther -> kAudioUnitSubType_AUConverter
+    descT.componentManufacturer = playbackRateUnitDescription.componentManufacturer; // kAudioUnitManufacturer_Apple
+    
+    CHECK_STATUS_AND_RETURN(AUGraphAddNode(audioGraph, &descT, &playbackRateNode));
     CHECK_STATUS_AND_RETURN(AUGraphNodeInfo(audioGraph, playbackRateNode, &playbackRateUnitDescription, &playbackRateUnit));
     
     //maxframes changed here
@@ -2200,7 +2205,49 @@ static BOOL GetHardwareCodecClassDesc(UInt32 formatId, AudioClassDescription* cl
     CHECK_STATUS_AND_RETURN(AudioUnitSetParameter(playbackRateUnit, kNewTimePitchParam_Rate, kAudioUnitScope_Global, 0, 1, 0));
 #endif
     
-  CHECK_STATUS_AND_RETURN(AudioUnitSetProperty(playbackRateUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, kOutputBus, &canonicalAudioStreamBasicDescription, sizeof(canonicalAudioStreamBasicDescription)));
+    /*
+     CF_ENUM(AudioFormatFlags)
+     {
+         1 -> kAudioFormatFlagIsFloat                     = (1U << 0),     // 0x1
+         2 -> kAudioFormatFlagIsBigEndian                 = (1U << 1),     // 0x2
+         4 -> kAudioFormatFlagIsSignedInteger             = (1U << 2),     // 0x4
+         8 -> kAudioFormatFlagIsPacked                    = (1U << 3),     // 0x8
+         16 -> kAudioFormatFlagIsAlignedHigh               = (1U << 4),     // 0x10
+         32 -> kAudioFormatFlagIsNonInterleaved            = (1U << 5),     // 0x20
+         64 -> kAudioFormatFlagIsNonMixable                = (1U << 6),     // 0x40
+         0 -> kAudioFormatFlagsAreAllClear                = 0x80000000,
+         
+         kLinearPCMFormatFlagIsFloat                 = kAudioFormatFlagIsFloat,
+         kLinearPCMFormatFlagIsBigEndian             = kAudioFormatFlagIsBigEndian,
+         kLinearPCMFormatFlagIsSignedInteger         = kAudioFormatFlagIsSignedInteger,
+         kLinearPCMFormatFlagIsPacked                = kAudioFormatFlagIsPacked,
+         kLinearPCMFormatFlagIsAlignedHigh           = kAudioFormatFlagIsAlignedHigh,
+         kLinearPCMFormatFlagIsNonInterleaved        = kAudioFormatFlagIsNonInterleaved,
+         kLinearPCMFormatFlagIsNonMixable            = kAudioFormatFlagIsNonMixable,
+         kLinearPCMFormatFlagsSampleFractionShift    = 7,
+         kLinearPCMFormatFlagsSampleFractionMask     = (0x3F << kLinearPCMFormatFlagsSampleFractionShift),
+         kLinearPCMFormatFlagsAreAllClear            = kAudioFormatFlagsAreAllClear,
+         
+         kAppleLosslessFormatFlag_16BitSourceData    = 1,
+         kAppleLosslessFormatFlag_20BitSourceData    = 2,
+         kAppleLosslessFormatFlag_24BitSourceData    = 3,
+         kAppleLosslessFormatFlag_32BitSourceData    = 4
+     };
+     
+    
+    OSStatus setStatus = AudioUnitSetProperty(playbackRateUnit,
+                                              kAudioUnitProperty_StreamFormat,
+                                              kAudioUnitScope_Input,
+                                              kOutputBus,
+                                              &canonicalAudioStreamBasicDescription,
+                                              sizeof(canonicalAudioStreamBasicDescription));
+    if ((status = setStatus)) {
+        [self unexpectedError:STKAudioPlayerErrorAudioSystemError];
+        return;
+    }
+    */
+    
+    CHECK_STATUS_AND_RETURN(AudioUnitSetProperty(playbackRateUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, kOutputBus, &canonicalAudioStreamBasicDescription, sizeof(canonicalAudioStreamBasicDescription)));
 }
 
 -(void) createOutputUnit

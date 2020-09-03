@@ -38,7 +38,7 @@
             for (int i = 0; i < tsNetURLs.count; i ++) {
                 if ([self isNewTSURL:tsNetURLs[i]]) {
 
-                    NSLog(@"New URL: %@", tsNetURLs[i]);
+//                    NSLog(@"New URL: %@", tsNetURLs[i]);
 
                     NSOperation *op = [NSBlockOperation blockOperationWithBlock:^{
                         __block BOOL finish = NO;
