@@ -38,7 +38,7 @@
     self = [super init];
     if (self) {
         STKAudioPlayerOptions options;
-        options = (STKAudioPlayerOptions){ .flushQueueOnSeek = YES, .enableVolumeMixer = NO, .equalizerBandFrequencies = {50, 100, 200, 400, 800, 1600, 2600, 16000}};
+        options = (STKAudioPlayerOptions){ .flushQueueOnSeek = YES, .enableVolumeMixer = YES, .equalizerBandFrequencies = {50, 100, 200, 400, 800, 1600, 2600, 16000}};
         _audioPlayer = [[STKAudioPlayer alloc] initWithOptions:options];
         _audioPlayer.delegate = self;
         _audioPlayer.meteringEnabled = YES;
@@ -98,6 +98,16 @@
 
 - (void) stop {
     [self.audioPlayer stop];
+}
+
+- (void) setIsJustFetchPCM:(BOOL)justFetchPCM {
+    _isJustFetchPCM = justFetchPCM;
+    if (_isJustFetchPCM) {
+        self.audioPlayer.volume = 0;
+    }
+    else {
+        self.audioPlayer.volume = 1;
+    }
 }
 
 #pragma mark - TsHandlerProtocol

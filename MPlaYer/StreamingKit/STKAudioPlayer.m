@@ -3167,6 +3167,7 @@ static OSStatus OutputRenderCallback(void* inRefCon, AudioUnitRenderActionFlags*
 		}
 	}
     
+    // 支持均衡器
     if (audioPlayer->equalizerEnabled != audioPlayer->equalizerOn)
     {
         Boolean isUpdated;

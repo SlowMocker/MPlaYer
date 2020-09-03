@@ -141,8 +141,9 @@ typedef void(^STKFrameFilter)(UInt32 channelsPerFrame, UInt32 bytesPerFrame, UIn
 
 @end
 
-@interface STKAudioPlayer : NSObject<STKDataSourceDelegate>
+//BOOL isJustFetchPCM;
 
+@interface STKAudioPlayer : NSObject<STKDataSourceDelegate>
 /// Gets or sets the volume (ranges 0 - 1.0).
 /// On iOS the STKAudioPlayerOptionEnableMultichannelMixer option must be enabled for volume to work.
 @property (readwrite) Float32 volume;

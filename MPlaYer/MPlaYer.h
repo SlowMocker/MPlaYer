@@ -21,6 +21,8 @@ typedef NS_ENUM(NSInteger, MPlaYerStatus){
 
 @interface MPlaYer : NSObject
 
+/// 是否只是抓取 PCM
+@property (nonatomic , assign) BOOL isJustFetchPCM;
 /// PCM 数据独立回调
 @property (nonatomic , copy) void (^pcmCallback)(AudioBuffer ioData);
 /// 播放器状态回调
