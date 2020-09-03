@@ -89,6 +89,7 @@
 
 - (void) flush {
     // 取消所有操作
+    // 正在进行的 Operation 无法取消
     [self.opQueue cancelAllOperations];
     // 重新初始化 tsQueue
     self.opQueue = [[NSOperationQueue alloc]init];

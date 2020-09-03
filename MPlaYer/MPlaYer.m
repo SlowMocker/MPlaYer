@@ -21,6 +21,7 @@
 /// 音频播放器
 @property (nonatomic , strong) STKAudioPlayer *audioPlayer;
 @property (nonatomic , strong) TsHandler *tsHandler;
+@property (nonatomic , assign) MPlaYerStatus status;
 @end
 
 @implementation MPlaYer
@@ -61,12 +62,17 @@
     return self;
 }
 
+/// 对于 HLS ，不管是 play 还是 resume，执行之前都当作重新播放
 - (void) play:(NSURL *)url {
     if ([url isAvalidM3U8URL]) {
         // HLS
         _isHLS = YES;
         
         self.tsHandler.m3u8URL = url;
+        
+        [self.tsHandler flush];
+        [self.audioPlayer stop];
+        // start 内部只是 queue source，只有 stop 状态才会自动 play
         [self.tsHandler start];
     }
     else {
@@ -75,12 +81,23 @@
     }
 }
 
+- (void) resume {
+    if (_isHLS) {
+        [self.tsHandler flush];
+        [self.audioPlayer stop];
+        [self.tsHandler start];
+    }
+    else {
+        [self.audioPlayer resume];
+    }
+}
+
 - (void) pasue {
-    
+    [self.audioPlayer pause];
 }
 
 - (void) stop {
-    
+    [self.audioPlayer stop];
 }
 
 #pragma mark - TsHandlerProtocol
@@ -93,17 +110,17 @@
 #pragma mark - STKAudioPlayerDelegate
 /// Raised when an item has started playing
 -(void) audioPlayer:(STKAudioPlayer*)audioPlayer didStartPlayingQueueItemId:(NSObject*)queueItemId {
-    NSLog(@"\n**** didStartPlayingQueueItemId");
+//    NSLog(@"\n**** didStartPlayingQueueItemId");
 }
 /// Raised when an item has finished buffering (may or may not be the currently playing item)
 /// This event may be raised multiple times for the same item if seek is invoked on the player
 /// 当 queueItemId 对应的媒体文件完成缓存时调用
 -(void) audioPlayer:(STKAudioPlayer*)audioPlayer didFinishBufferingSourceWithQueueItemId:(NSObject*)queueItemId {
-    NSLog(@"\n**** didFinishBufferingSourceWithQueueItemId");
+//    NSLog(@"\n**** didFinishBufferingSourceWithQueueItemId");
 }
 /// Raised when the state of the player has changed
 -(void) audioPlayer:(STKAudioPlayer*)audioPlayer stateChanged:(STKAudioPlayerState)state previousState:(STKAudioPlayerState)previousState {
-    NSLog(@"\n**** stateChanged | from %d to %d", (int)previousState, (int)state);
+//    NSLog(@"\n**** stateChanged | from %d to %d", (int)previousState, (int)state);
     /*
      0 -> STKAudioPlayerStateReady,
      1 -> STKAudioPlayerStateRunning = 1,
@@ -116,18 +133,22 @@
      */
     switch (state) {
         case STKAudioPlayerStatePlaying: {
+            self.status = MPlaYerStatusPLAYING;
             if (self.playerStatusCallback) self.playerStatusCallback(MPlaYerStatusPLAYING);
             break;
         }
         case STKAudioPlayerStatePaused: {
+            self.status = MPlaYerStatusPAUSE;
             if (self.playerStatusCallback) self.playerStatusCallback(MPlaYerStatusPAUSE);
             break;
         }
         case STKAudioPlayerStateDisposed: {
-            if (self.playerStatusCallback) self.playerStatusCallback(MPlaYerStatusDISPOSE);
+            self.status = MPlaYerStatusDISPOSAL;
+            if (self.playerStatusCallback) self.playerStatusCallback(MPlaYerStatusDISPOSAL);
             break;
         }
         case STKAudioPlayerStateStopped: {
+            self.status = MPlaYerStatusSTOP;
             if (self.playerStatusCallback) self.playerStatusCallback(MPlaYerStatusSTOP);
             break;
         }
@@ -136,10 +157,12 @@
         case STKAudioPlayerStateReady: {
             if (_isHLS) {
                 if (!(previousState == STKAudioPlayerStatePlaying && state == STKAudioPlayerStateBuffering)) {
+                    self.status = MPlaYerStatusLOADING;
                     if (self.playerStatusCallback) self.playerStatusCallback(MPlaYerStatusLOADING);
                 }
             }
             else {
+                self.status = MPlaYerStatusLOADING;
                 if (self.playerStatusCallback) self.playerStatusCallback(MPlaYerStatusLOADING);
             }
             break;

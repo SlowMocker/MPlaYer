@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic , weak) id<TsHandlerProtocol> delegate;
 
 - (void) start;
+- (void) flush;
 
 @end
 

@@ -16,7 +16,7 @@ typedef NS_ENUM(NSInteger, MPlaYerStatus){
     MPlaYerStatusPLAYING, // 播放中
     MPlaYerStatusPAUSE, // 暂停中
     MPlaYerStatusSTOP, // 停止
-    MPlaYerStatusDISPOSE, // 销毁（暂时没用）
+    MPlaYerStatusDISPOSAL, // 销毁（暂时没用）
 };
 
 @interface MPlaYer : NSObject
@@ -28,6 +28,8 @@ typedef NS_ENUM(NSInteger, MPlaYerStatus){
 
 /// 播放
 - (void) play:(NSURL *)url;
+/// 恢复播放
+- (void) resume;
 /// 暂停
 - (void) pasue;
 /// 停止
