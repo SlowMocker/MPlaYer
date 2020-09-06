@@ -47,8 +47,8 @@
                                           handler:^(NSURL * _Nonnull aacOrMp3URL, NSURL * _Nonnull h264URL, Error * _Nonnull error) {
 
                             if ([error isSuccess]) {
-                                if ([self.delegate respondsToSelector:@selector(tsHandler:didReceiveNewAudioPath:)]) {
-                                    [self.delegate tsHandler:self didReceiveNewAudioPath:aacOrMp3URL];
+                                if ([self.delegate respondsToSelector:@selector(tsHandler:didReceiveNewAudioURL:)]) {
+                                    [self.delegate tsHandler:self didReceiveNewAudioURL:aacOrMp3URL];
                                 }
                                 [self cacheAACLocalURL:aacOrMp3URL];
                             }

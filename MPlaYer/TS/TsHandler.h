@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class TsHandler;
 @protocol TsHandlerProtocol <NSObject>
 
-- (void) tsHandler:(TsHandler *)engine didReceiveNewAudioPath:(NSURL *)url;
+- (void) tsHandler:(TsHandler *)engine didReceiveNewAudioURL:(NSURL *)url;
 
 @end
 

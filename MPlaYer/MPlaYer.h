@@ -33,7 +33,7 @@ typedef NS_ENUM(NSInteger, MPlaYerStatus){
 /// 恢复播放
 - (void) resume;
 /// 暂停
-- (void) pasue;
+- (void) pause;
 /// 停止
 - (void) stop;
 @end

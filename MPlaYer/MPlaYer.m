@@ -37,8 +37,11 @@
 - (id) init {
     self = [super init];
     if (self) {
-        STKAudioPlayerOptions options;
-        options = (STKAudioPlayerOptions){ .flushQueueOnSeek = YES, .enableVolumeMixer = YES, .equalizerBandFrequencies = {50, 100, 200, 400, 800, 1600, 2600, 16000}};
+        STKAudioPlayerOptions options = (STKAudioPlayerOptions){
+            .flushQueueOnSeek = YES,
+            .enableVolumeMixer = YES,
+            .equalizerBandFrequencies = {50, 100, 200, 400, 800, 1600, 2600, 16000}
+        };
         _audioPlayer = [[STKAudioPlayer alloc] initWithOptions:options];
         _audioPlayer.delegate = self;
         _audioPlayer.meteringEnabled = YES;
@@ -92,7 +95,7 @@
     }
 }
 
-- (void) pasue {
+- (void) pause {
     [self.audioPlayer pause];
 }
 
@@ -111,7 +114,7 @@
 }
 
 #pragma mark - TsHandlerProtocol
-- (void) tsHandler:(TsHandler *)engine didReceiveNewAudioPath:(NSURL *)url {
+- (void) tsHandler:(TsHandler *)engine didReceiveNewAudioURL:(NSURL *)url {
     if (_isHLS) {
         [self.audioPlayer queueURL:url];
     }
