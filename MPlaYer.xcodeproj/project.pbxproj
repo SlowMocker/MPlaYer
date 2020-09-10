@@ -35,6 +35,9 @@
 		608AA2EB24ECD6AF009A90DF /* STKQueueEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = 608AA24724EBC02A009A90DF /* STKQueueEntry.h */; };
 		608AA2EC24ECD6AF009A90DF /* STKSpinLock.h in Headers */ = {isa = PBXBuildFile; fileRef = 608AA24F24EBC02B009A90DF /* STKSpinLock.h */; };
 		608AA2F324ECF289009A90DF /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 608AA2F224ECF289009A90DF /* AudioToolbox.framework */; };
+		FF3E8A562509B85F0098FAF9 /* MPcmPlaYer.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3E8A542509B85F0098FAF9 /* MPcmPlaYer.m */; };
+		FF3E8A572509B85F0098FAF9 /* MPcmPlaYer.h in Headers */ = {isa = PBXBuildFile; fileRef = FF3E8A552509B85F0098FAF9 /* MPcmPlaYer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FF3E8A582509B9500098FAF9 /* MPcmPlaYer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = FF3E8A552509B85F0098FAF9 /* MPcmPlaYer.h */; };
 		FFA070A724FF3FA200BC169D /* Downloader.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA0708924FF3FA200BC169D /* Downloader.h */; };
 		FFA070A824FF3FA200BC169D /* M3U8Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA0708A24FF3FA200BC169D /* M3U8Parser.m */; };
 		FFA070A924FF3FA200BC169D /* TsDemuxer.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA0708B24FF3FA200BC169D /* TsDemuxer.h */; };
@@ -71,6 +74,7 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				FF3E8A582509B9500098FAF9 /* MPcmPlaYer.h in CopyFiles */,
 				6070027924EA7E0F005EB7AD /* MPlaYer.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -107,6 +111,8 @@
 		608AA27F24EBC256009A90DF /* TsHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TsHandler.h; sourceTree = "<group>"; };
 		608AA28024EBC256009A90DF /* TsHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TsHandler.m; sourceTree = "<group>"; };
 		608AA2F224ECF289009A90DF /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
+		FF3E8A542509B85F0098FAF9 /* MPcmPlaYer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPcmPlaYer.m; sourceTree = "<group>"; };
+		FF3E8A552509B85F0098FAF9 /* MPcmPlaYer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPcmPlaYer.h; sourceTree = "<group>"; };
 		FFA0708924FF3FA200BC169D /* Downloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Downloader.h; sourceTree = "<group>"; };
 		FFA0708A24FF3FA200BC169D /* M3U8Parser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M3U8Parser.m; sourceTree = "<group>"; };
 		FFA0708B24FF3FA200BC169D /* TsDemuxer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TsDemuxer.h; sourceTree = "<group>"; };
@@ -168,6 +174,7 @@
 		6070027524EA7E0F005EB7AD /* MPlaYer */ = {
 			isa = PBXGroup;
 			children = (
+				FF3E8A532509B85F0098FAF9 /* PCM */,
 				608AA25B24EBC246009A90DF /* TS */,
 				608AA23C24EBC02A009A90DF /* StreamingKit */,
 				608AA23524EBA1F4009A90DF /* Error */,
@@ -242,6 +249,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		FF3E8A532509B85F0098FAF9 /* PCM */ = {
+			isa = PBXGroup;
+			children = (
+				FF3E8A552509B85F0098FAF9 /* MPcmPlaYer.h */,
+				FF3E8A542509B85F0098FAF9 /* MPcmPlaYer.m */,
+			);
+			path = PCM;
+			sourceTree = "<group>";
+		};
 		FFA0708F24FF3FA200BC169D /* Cdemux */ = {
 			isa = PBXGroup;
 			children = (
@@ -289,6 +305,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF3E8A572509B85F0098FAF9 /* MPcmPlaYer.h in Headers */,
 				FFA070B524FF3FA200BC169D /* AFURLRequestSerialization.h in Headers */,
 				FFA070B024FF3FA200BC169D /* ac3.h in Headers */,
 				FFA070B224FF3FA200BC169D /* AFSecurityPolicy.h in Headers */,
@@ -397,6 +414,7 @@
 				608AA25324EBC02B009A90DF /* STKHTTPDataSource.m in Sources */,
 				FFA070BA24FF3FA200BC169D /* AFURLRequestSerialization.m in Sources */,
 				608AA25424EBC02B009A90DF /* STKLocalFileDataSource.m in Sources */,
+				FF3E8A562509B85F0098FAF9 /* MPcmPlaYer.m in Sources */,
 				608AA23B24EBA27D009A90DF /* Error.m in Sources */,
 				608AA25724EBC02B009A90DF /* STKAudioPlayer.m in Sources */,
 				FFA070B624FF3FA200BC169D /* AFURLResponseSerialization.m in Sources */,
