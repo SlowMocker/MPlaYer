@@ -3,26 +3,28 @@
 //  QPlayAutoDemo
 //
 //  Created by iSmicro on 2020/8/30.
-//  Copyright © 2020 腾讯音乐. All rights reserved.
+//  Copyright © 2020 wuwenhao. All rights reserved.
 //
 
 #import "MPcmPlaYer.h"
 
+MPcmPlaYer *cPcmPlaYer = nil;
+
 @interface MPcmPlaYer()
+// asbd
+@property (nonatomic , assign) AudioStreamBasicDescription asbd;
+// 填充 buffer 同步锁
+@property (nonatomic , strong) NSLock *syncLock;
+// 播放文件 id
+@property (nonatomic , copy) NSString *sourceIdentifier;
 
-@property (nonatomic, strong) NSLock *syncLock;
-
-/// 当前播放状态
-@property (nonatomic , assign) MPlaYerStatus status;
-
+@property (nonatomic , assign) BOOL isRunning;
 @end
 
-#define kBufferCount 5
-// 一个 buffer 100K
-#define kBufferSize (1024*100)
+#define kBufferCount 3
+// 一个 buffer 250K
+#define kBufferSize (1024*250)
 
-
-MPcmPlaYer *mPcmPlaYer = nil;
 
 @implementation MPcmPlaYer
 {
@@ -30,6 +32,8 @@ MPcmPlaYer *mPcmPlaYer = nil;
     AudioQueueRef _aqInstance;
     /// buffers
     AudioQueueBufferRef _aqBuffers[kBufferCount];
+    
+    BOOL _forbbidCallback;
 }
 
 - (id) init {
@@ -37,63 +41,77 @@ MPcmPlaYer *mPcmPlaYer = nil;
     if (self) {
         self.asbd = [self defaultAsbd];
         self.syncLock = [[NSLock alloc]init];
-        mPcmPlaYer = self;
+        cPcmPlaYer = self;
         
-        [self initAudioQueueAndBuffers];
-        
-        [self callbackStatus:MPlaYerStatusLOADING];
+        _forbbidCallback = NO;
     }
     return self;
 }
 
 void aqBufferDidReadCallback(void * __nullable inUserData, AudioQueueRef inAQ, AudioQueueBufferRef inBuffer) {
     
-    memset(inBuffer->mAudioData, 0, kBufferSize);
+//    memset(inBuffer->mAudioData, 0, kBufferSize);
     inBuffer->mAudioDataByteSize = 0;
     
-    if (mPcmPlaYer.status == MPlaYerStatusSTOP) {
-        return;
+    if (cPcmPlaYer) {
+        if (cPcmPlaYer.allBufferNullCallback && [cPcmPlaYer buffersNULL]) {
+            cPcmPlaYer.allBufferNullCallback();
+        }
+        if (cPcmPlaYer->_forbbidCallback) {
+            return;
+        }
+        NSNotification *noti = [NSNotification notificationWithName:kNotificationShouldFillAudioQueueBuffer
+                                                             object:nil
+                                                           userInfo:@{@"sourceId": cPcmPlaYer.sourceIdentifier}];
+        [[NSNotificationCenter defaultCenter] postNotification:noti];
     }
-    
-    if ([mPcmPlaYer buffersNULL]) {
-        [mPcmPlaYer callbackStatus:MPlaYerStatusSTOP];
-        return;
-    }
-    
-    NSNotification *noti = [NSNotification notificationWithName:kNotificationShouldFillAudioQueueBuffer
-                                                         object:nil
-                                                       userInfo:@{@"player": mPcmPlaYer}];
-    [[NSNotificationCenter defaultCenter] postNotification:noti];
 }
 
 void aqPropertyListenerCallback(void * __nullable inUserData, AudioQueueRef inAQ, AudioQueuePropertyID inID) {
     MPcmPlaYer *instance = (__bridge MPcmPlaYer *)inUserData;
     UInt32 isRunning = 0;
     UInt32 size = sizeof(isRunning);
-    
+
     if (instance == NULL) return;
     // 停止可能需要调用 stop 触发
     OSStatus err = AudioQueueGetProperty(inAQ, kAudioQueueProperty_IsRunning, &isRunning, &size);
-    if (err) {
-        NSLog(@"PCM player running: NO");
+    if (!err && isRunning == 1) {
+        NSLog(@"PCM player running: YES");
+        cPcmPlaYer.isRunning = YES;
     }
     else {
-        NSLog(@"PCM player running: YES");
-        
+        NSLog(@"PCM player running: NO");
+        cPcmPlaYer.isRunning = NO;
     }
 }
 
 - (void) dealloc {
-    NSLog(@"MPcmPlaYer dealloc!!!");
+    [self dispose];
+    NSLog(@"\n\n\n*******************************************************************MPcmPlaYer dealloc!!! Happiness Maybe!!!\n\n\n*");
 }
 
 #pragma mark - public methods
-- (void) prepareToPlay {
+- (void) prepareToPlay:(AudioStreamBasicDescription)asbd {
+    
+    _forbbidCallback = NO;
+    if (asbd.mSampleRate > 0 && asbd.mFormatID == kAudioFormatLinearPCM) {
+        self.asbd = asbd;
+    }
+    
+    // 1. 重置 queue
+    if (_aqInstance) {
+        [self stop];
+        _aqInstance = NULL;
+    }
+    [self initAudioQueueAndBuffers];
+
+    // 2. 重置媒体标识
+    self.sourceIdentifier = [NSString stringWithFormat:@"%lf", [NSDate date].timeIntervalSince1970];
     for (int i = 0; i < kBufferCount; i ++) {
         if (!self->_aqBuffers[i] || self->_aqBuffers[i]->mAudioDataByteSize <= 0) {
             NSNotification *noti = [NSNotification notificationWithName:kNotificationShouldFillAudioQueueBuffer
                                                                  object:nil
-                                                               userInfo:@{@"player": mPcmPlaYer}];
+                                                               userInfo:@{@"sourceId": self.sourceIdentifier}];
             [[NSNotificationCenter defaultCenter] postNotification:noti];
         }
     }
@@ -108,7 +126,6 @@ void aqPropertyListenerCallback(void * __nullable inUserData, AudioQueueRef inAQ
         // 还未填充过数据
         if (!_aqBuffers[i] || _aqBuffers[i]->mAudioDataByteSize <= 0) {
             _aqBuffers[i]->mAudioDataByteSize = buffer.mDataByteSize;
-            
             memcpy(_aqBuffers[i]->mAudioData,
                    buffer.mData,
                    buffer.mDataByteSize);
@@ -141,13 +158,11 @@ void aqPropertyListenerCallback(void * __nullable inUserData, AudioQueueRef inAQ
         }
     }
     [self.syncLock unlock];
-    if (status == noErr && self.status == MPlaYerStatusLOADING) {
-        [self callbackStatus:MPlaYerStatusPLAYING];
-    }
     return status;
 }
 
 - (void) play {
+    _forbbidCallback = NO;
     // AudioQueueStart 可以多次连续调用，无副作用
     // 当前 AudioQueue 暂停后，在前台模式 AudioQueue 还有机会重启。比如被当前音乐打断，可以重启 AQ 恢复
     // 但是如果是系统级，比如来电，重启 AQ 会返回错误码
@@ -156,18 +171,21 @@ void aqPropertyListenerCallback(void * __nullable inUserData, AudioQueueRef inAQ
 
 - (void) pause {
     AudioQueuePause(_aqInstance);
-    [self callbackStatus:MPlaYerStatusPAUSE];
 }
 
 - (void) resume {
     AudioQueueStart(_aqInstance, NULL);
-    [self callbackStatus:MPlaYerStatusPLAYING];
 }
 
 - (void) stop {
+    _forbbidCallback = YES;
     // 会触发 aqBufferDidReadCallback
     AudioQueueStop(_aqInstance, true);
-    [self callbackStatus:MPlaYerStatusSTOP];
+    AudioQueueReset(_aqInstance);
+}
+
+- (void) releaseGC {
+    cPcmPlaYer = nil;
 }
 
 - (void) setAsbd:(AudioStreamBasicDescription)asbd {
@@ -245,13 +263,7 @@ void aqPropertyListenerCallback(void * __nullable inUserData, AudioQueueRef inAQ
     }
 }
 
-- (void) callbackStatus:(MPlaYerStatus)status {
-    self.status = status;
-    if (self.playerStatusCallback) {
-        self.playerStatusCallback(self.status);
-    }
-}
-
+/// 检查队列中的 buffer 是否全空
 - (BOOL) buffersNULL {
     for(int i = 0; i < kBufferCount; i ++) {
         if (_aqBuffers[i]->mAudioDataByteSize > 0) {

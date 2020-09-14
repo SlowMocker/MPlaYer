@@ -41,7 +41,8 @@
 //                    NSLog(@"New URL: %@", tsNetURLs[i]);
 
                     NSOperation *op = [NSBlockOperation blockOperationWithBlock:^{
-                        __block BOOL finish = NO;
+//                        __block BOOL finish = NO;
+                        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
 
                         [TsDemuxer demuxNetTsFile:tsNetURLs[i]
                                           handler:^(NSURL * _Nonnull aacOrMp3URL, NSURL * _Nonnull h264URL, Error * _Nonnull error) {
@@ -52,11 +53,13 @@
                                 }
                                 [self cacheAACLocalURL:aacOrMp3URL];
                             }
-                            finish = YES;
+//                            finish = YES;
+                            dispatch_semaphore_signal(sema);
                         }];
-                        while (!finish) {
-                            [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
-                        }
+                        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+//                        while (!finish) {
+//                            [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+//                        }
 
                     }];
                     [self.opQueue addOperation:op];

@@ -3,7 +3,7 @@
 //  QPlayAutoDemo
 //
 //  Created by iSmicro on 2020/8/30.
-//  Copyright © 2020 腾讯音乐. All rights reserved.
+//  Copyright © 2020 wuwenhao. All rights reserved.
 //
 
 // 潜在问题：
@@ -16,27 +16,28 @@
 #import <Foundation/Foundation.h>
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
-#import "MPlaYer.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class MPcmPlaYer;
 
 #define kNotificationShouldFillAudioQueueBuffer @"kNotificationShouldFillAudioQueueBuffer"
 
 @interface MPcmPlaYer : NSObject
-/// 音频参数
-/// 切换曲目时，需要重新赋值
-/// asbd 被重新赋值后，AudioQueueInstance 会 flush 所有 buffer
-@property (nonatomic , assign) AudioStreamBasicDescription asbd;
+/// 当前播放信息标识
+/// 每次 prepare 都会重置
+@property (nonatomic , copy , readonly) NSString *sourceIdentifier;
+@property (nonatomic , assign , readonly) BOOL isRunning;
+@property (nonatomic , assign , readonly) AudioStreamBasicDescription asbd;
 
 /// 是否只是抓取 PCM
 @property (nonatomic , assign) BOOL isJustFetchPCM;
 /// PCM 数据独立回调
 @property (nonatomic , copy) void (^pcmCallback)(AudioBuffer ioData);
-/// 播放器状态回调
-@property (nonatomic , copy) void (^playerStatusCallback)(MPlaYerStatus status);
+/// 所有的 queue buffer 全部为空
+@property (nonatomic , copy) void (^allBufferNullCallback)(void);
 /// 预加载
-- (void) prepareToPlay;
+- (void) prepareToPlay:(AudioStreamBasicDescription)asbd;
 /// 播放
 - (void) play;
 /// 暂停
@@ -45,6 +46,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void) resume;
 /// 停止
 - (void) stop;
+/// 释放全局 C 变量
+- (void) releaseGC;
 
 /// 将 buffer 加入队列
 - (OSStatus) enqueueAudioBuffer:(AudioBuffer)buffer;

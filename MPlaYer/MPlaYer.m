@@ -77,6 +77,7 @@
         [self.audioPlayer stop];
         // start 内部只是 queue source，只有 stop 状态才会自动 play
         [self.tsHandler start];
+        if (self.playerStatusCallback) self.playerStatusCallback(MPlaYerStatusLOADING);
     }
     else {
         _isHLS = NO;
@@ -133,7 +134,7 @@
 }
 /// Raised when the state of the player has changed
 -(void) audioPlayer:(STKAudioPlayer*)audioPlayer stateChanged:(STKAudioPlayerState)state previousState:(STKAudioPlayerState)previousState {
-//    NSLog(@"\n**** stateChanged | from %d to %d", (int)previousState, (int)state);
+    NSLog(@"\n**** stateChanged | from %d to %d", (int)previousState, (int)state);
     /*
      0 -> STKAudioPlayerStateReady,
      1 -> STKAudioPlayerStateRunning = 1,
