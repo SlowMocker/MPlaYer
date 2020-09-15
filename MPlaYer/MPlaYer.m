@@ -188,6 +188,7 @@
 }
 /// Raised when an item has finished playing
 -(void) audioPlayer:(STKAudioPlayer*)audioPlayer didFinishPlayingQueueItemId:(NSObject*)queueItemId withReason:(STKAudioPlayerStopReason)stopReason andProgress:(double)progress andDuration:(double)duration {
+    if (self.playerStatusCallback && stopReason == STKAudioPlayerStopReasonEof) self.playerStatusCallback(MPlaYerStatusEND);
     /* 当 id 正常播放结束时的打印
      **** didFinishPlayingQueueItemId
      id : http://music.163.com/song/media/outer/url?id=569212211.mp3

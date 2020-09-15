@@ -15,6 +15,7 @@ typedef NS_ENUM(NSInteger, MPlaYerStatus){
     MPlaYerStatusLOADING, // 资源加载中
     MPlaYerStatusPLAYING, // 播放中
     MPlaYerStatusPAUSE, // 暂停中
+    MPlaYerStatusEND, // 播放结束
     MPlaYerStatusSTOP, // 停止
     MPlaYerStatusDISPOSAL, // 销毁（暂时没用）
 };

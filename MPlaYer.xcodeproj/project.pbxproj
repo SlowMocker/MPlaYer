@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		6070027824EA7E0F005EB7AD /* MPlaYer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6070027724EA7E0F005EB7AD /* MPlaYer.m */; };
-		6070027924EA7E0F005EB7AD /* MPlaYer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6070027624EA7E0F005EB7AD /* MPlaYer.h */; platformFilter = ios; };
 		608AA23B24EBA27D009A90DF /* Error.m in Sources */ = {isa = PBXBuildFile; fileRef = 608AA23A24EBA27D009A90DF /* Error.m */; };
 		608AA25224EBC02B009A90DF /* STKQueueEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 608AA23D24EBC02A009A90DF /* STKQueueEntry.m */; };
 		608AA25324EBC02B009A90DF /* STKHTTPDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 608AA24124EBC02A009A90DF /* STKHTTPDataSource.m */; };
@@ -37,7 +36,9 @@
 		608AA2F324ECF289009A90DF /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 608AA2F224ECF289009A90DF /* AudioToolbox.framework */; };
 		FF3E8A562509B85F0098FAF9 /* MPcmPlaYer.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3E8A542509B85F0098FAF9 /* MPcmPlaYer.m */; };
 		FF3E8A572509B85F0098FAF9 /* MPcmPlaYer.h in Headers */ = {isa = PBXBuildFile; fileRef = FF3E8A552509B85F0098FAF9 /* MPcmPlaYer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FF3E8A582509B9500098FAF9 /* MPcmPlaYer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = FF3E8A552509B85F0098FAF9 /* MPcmPlaYer.h */; };
+		FF8A966A250F483B0041926E /* MPcmPlaYer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = FF3E8A552509B85F0098FAF9 /* MPcmPlaYer.h */; };
+		FF8A966B250F483B0041926E /* Error.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 608AA23924EBA27D009A90DF /* Error.h */; platformFilter = ios; };
+		FF8A966C250F483B0041926E /* MPlaYer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6070027624EA7E0F005EB7AD /* MPlaYer.h */; platformFilter = ios; };
 		FFA070A724FF3FA200BC169D /* Downloader.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA0708924FF3FA200BC169D /* Downloader.h */; };
 		FFA070A824FF3FA200BC169D /* M3U8Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA0708A24FF3FA200BC169D /* M3U8Parser.m */; };
 		FFA070A924FF3FA200BC169D /* TsDemuxer.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA0708B24FF3FA200BC169D /* TsDemuxer.h */; };
@@ -71,11 +72,12 @@
 		6070027124EA7E0F005EB7AD /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
+			dstPath = include;
 			dstSubfolderSpec = 16;
 			files = (
-				FF3E8A582509B9500098FAF9 /* MPcmPlaYer.h in CopyFiles */,
-				6070027924EA7E0F005EB7AD /* MPlaYer.h in CopyFiles */,
+				FF8A966A250F483B0041926E /* MPcmPlaYer.h in CopyFiles */,
+				FF8A966B250F483B0041926E /* Error.h in CopyFiles */,
+				FF8A966C250F483B0041926E /* MPlaYer.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
