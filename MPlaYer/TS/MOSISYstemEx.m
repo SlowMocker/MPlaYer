@@ -6,9 +6,9 @@
 //  Copyright © 2020 吴文豪. All rights reserved.
 //
 
-#import "SYstemEx.h"
+#import "MOSISYstemEx.h"
 
-@implementation SYstemEx
+@implementation MOSISYstemEx
 
 @end
 

@@ -10,7 +10,7 @@
 #import "ts.h"
 #import "LocalCacheHandler.h"
 #import "Downloader.h"
-#import "SYstemEx.h"
+#import "MOSISYstemEx.h"
 
 static double const UndefinedFPS = -1.0;
 
@@ -52,7 +52,7 @@ static double const UndefinedFPS = -1.0;
         }
     };
 
-    AFHTTPSessionManager *session  = [AFHTTPSessionManager manager];
+    MOSIHTTPSessionManager *session  = [MOSIHTTPSessionManager manager];
     NSURLRequest *request = [NSURLRequest requestWithURL:tsURL];
     NSURLSessionDownloadTask *downloadTask = [session downloadTaskWithRequest:request
                                                                     progress: nil

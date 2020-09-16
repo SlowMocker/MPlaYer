@@ -35,7 +35,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// PCM 数据独立回调
 @property (nonatomic , copy) void (^pcmCallback)(AudioBuffer ioData);
 /// 所有的 queue buffer 全部为空
-@property (nonatomic , copy) void (^allBufferNullCallback)(void);
+/// 返回 YES 表示播放结束
+@property (nonatomic , copy) BOOL (^allBufferNullCallback)(void);
 /// 预加载
 - (void) prepareToPlay:(AudioStreamBasicDescription)asbd;
 /// 播放

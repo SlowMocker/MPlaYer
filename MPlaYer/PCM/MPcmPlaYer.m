@@ -55,8 +55,12 @@ void aqBufferDidReadCallback(void * __nullable inUserData, AudioQueueRef inAQ, A
     
     if (cPcmPlaYer) {
         if (cPcmPlaYer.allBufferNullCallback && [cPcmPlaYer buffersNULL]) {
-            cPcmPlaYer.allBufferNullCallback();
+            // 最后一次回调的时候，在外部将 cPcmPlaYer 释放了
+            if (cPcmPlaYer.allBufferNullCallback()) {
+                return;
+            }
         }
+        // 释放之后还在访问 cPcmPlaYer
         if (cPcmPlaYer->_forbbidCallback) {
             return;
         }

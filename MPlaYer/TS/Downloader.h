@@ -6,4 +6,4 @@
 //  Copyright © 2020 吴文豪. All rights reserved.
 //
 
-#import "AFNetworking.h"
+#import "MOSINetworking.h"

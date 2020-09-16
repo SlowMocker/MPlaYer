@@ -8,7 +8,7 @@
 
 #import "M3U8Parser.h"
 #import "Downloader.h"
-#import "SYstemEx.h"
+#import "MOSISYstemEx.h"
 #import "LocalCacheHandler.h"
 
 @implementation M3U8Parser
@@ -44,7 +44,7 @@
         [LocalCacheHandler cleanPath:tempDir];
     };
 
-    AFHTTPSessionManager *session  = [AFHTTPSessionManager manager];
+    MOSIHTTPSessionManager *session  = [MOSIHTTPSessionManager manager];
     NSURLRequest *request = [NSURLRequest requestWithURL:m3u8URL];
     NSURLSessionDownloadTask *downloadTask = [session downloadTaskWithRequest:request
                                                                     progress: nil

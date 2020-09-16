@@ -12,7 +12,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-#import "SYstemEx.h"
+#import "MOSISYstemEx.h"
 
 #import "TsHandler.h"
 

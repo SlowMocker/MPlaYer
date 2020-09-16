@@ -42,7 +42,7 @@
 		FFA070A724FF3FA200BC169D /* Downloader.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA0708924FF3FA200BC169D /* Downloader.h */; };
 		FFA070A824FF3FA200BC169D /* M3U8Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA0708A24FF3FA200BC169D /* M3U8Parser.m */; };
 		FFA070A924FF3FA200BC169D /* TsDemuxer.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA0708B24FF3FA200BC169D /* TsDemuxer.h */; };
-		FFA070AA24FF3FA200BC169D /* SYstemEx.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA0708C24FF3FA200BC169D /* SYstemEx.h */; };
+		FFA070AA24FF3FA200BC169D /* MOSISYstemEx.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA0708C24FF3FA200BC169D /* MOSISYstemEx.h */; };
 		FFA070AB24FF3FA200BC169D /* TsDemuxer.mm in Sources */ = {isa = PBXBuildFile; fileRef = FFA0708D24FF3FA200BC169D /* TsDemuxer.mm */; };
 		FFA070AC24FF3FA200BC169D /* LocalCacheHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA0708E24FF3FA200BC169D /* LocalCacheHandler.h */; };
 		FFA070AD24FF3FA200BC169D /* h264.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA0709024FF3FA200BC169D /* h264.h */; };
@@ -50,20 +50,20 @@
 		FFA070AF24FF3FA200BC169D /* ts.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA0709224FF3FA200BC169D /* ts.h */; };
 		FFA070B024FF3FA200BC169D /* ac3.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA0709324FF3FA200BC169D /* ac3.h */; };
 		FFA070B124FF3FA200BC169D /* ts.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FFA0709424FF3FA200BC169D /* ts.cpp */; };
-		FFA070B224FF3FA200BC169D /* AFSecurityPolicy.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA0709724FF3FA200BC169D /* AFSecurityPolicy.h */; };
-		FFA070B324FF3FA200BC169D /* AFNetworkReachabilityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA0709824FF3FA200BC169D /* AFNetworkReachabilityManager.h */; };
-		FFA070B424FF3FA200BC169D /* AFURLSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA0709924FF3FA200BC169D /* AFURLSessionManager.h */; };
-		FFA070B524FF3FA200BC169D /* AFURLRequestSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA0709A24FF3FA200BC169D /* AFURLRequestSerialization.h */; };
-		FFA070B624FF3FA200BC169D /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA0709B24FF3FA200BC169D /* AFURLResponseSerialization.m */; };
-		FFA070B724FF3FA200BC169D /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA0709C24FF3FA200BC169D /* AFHTTPSessionManager.m */; };
-		FFA070B824FF3FA200BC169D /* AFURLResponseSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA0709D24FF3FA200BC169D /* AFURLResponseSerialization.h */; };
-		FFA070B924FF3FA200BC169D /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA0709E24FF3FA200BC169D /* AFURLSessionManager.m */; };
-		FFA070BA24FF3FA200BC169D /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA0709F24FF3FA200BC169D /* AFURLRequestSerialization.m */; };
-		FFA070BB24FF3FA200BC169D /* AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA070A024FF3FA200BC169D /* AFNetworking.h */; };
-		FFA070BC24FF3FA200BC169D /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA070A124FF3FA200BC169D /* AFNetworkReachabilityManager.m */; };
-		FFA070BD24FF3FA200BC169D /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA070A224FF3FA200BC169D /* AFSecurityPolicy.m */; };
-		FFA070BE24FF3FA200BC169D /* AFHTTPSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA070A324FF3FA200BC169D /* AFHTTPSessionManager.h */; };
-		FFA070BF24FF3FA200BC169D /* SYstemEx.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA070A424FF3FA200BC169D /* SYstemEx.m */; };
+		FFA070B224FF3FA200BC169D /* MOSISecurityPolicy.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA0709724FF3FA200BC169D /* MOSISecurityPolicy.h */; };
+		FFA070B324FF3FA200BC169D /* MOSINetworkReachabilityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA0709824FF3FA200BC169D /* MOSINetworkReachabilityManager.h */; };
+		FFA070B424FF3FA200BC169D /* MOSIURLSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA0709924FF3FA200BC169D /* MOSIURLSessionManager.h */; };
+		FFA070B524FF3FA200BC169D /* MOSIURLRequestSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA0709A24FF3FA200BC169D /* MOSIURLRequestSerialization.h */; };
+		FFA070B624FF3FA200BC169D /* MOSIURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA0709B24FF3FA200BC169D /* MOSIURLResponseSerialization.m */; };
+		FFA070B724FF3FA200BC169D /* MOSIHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA0709C24FF3FA200BC169D /* MOSIHTTPSessionManager.m */; };
+		FFA070B824FF3FA200BC169D /* MOSIURLResponseSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA0709D24FF3FA200BC169D /* MOSIURLResponseSerialization.h */; };
+		FFA070B924FF3FA200BC169D /* MOSIURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA0709E24FF3FA200BC169D /* MOSIURLSessionManager.m */; };
+		FFA070BA24FF3FA200BC169D /* MOSIURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA0709F24FF3FA200BC169D /* MOSIURLRequestSerialization.m */; };
+		FFA070BB24FF3FA200BC169D /* MOSINetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA070A024FF3FA200BC169D /* MOSINetworking.h */; };
+		FFA070BC24FF3FA200BC169D /* MOSINetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA070A124FF3FA200BC169D /* MOSINetworkReachabilityManager.m */; };
+		FFA070BD24FF3FA200BC169D /* MOSISecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA070A224FF3FA200BC169D /* MOSISecurityPolicy.m */; };
+		FFA070BE24FF3FA200BC169D /* MOSIHTTPSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA070A324FF3FA200BC169D /* MOSIHTTPSessionManager.h */; };
+		FFA070BF24FF3FA200BC169D /* MOSISYstemEx.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA070A424FF3FA200BC169D /* MOSISYstemEx.m */; };
 		FFA070C024FF3FA200BC169D /* M3U8Parser.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA070A524FF3FA200BC169D /* M3U8Parser.h */; };
 		FFA070C124FF3FA200BC169D /* LocalCacheHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA070A624FF3FA200BC169D /* LocalCacheHandler.m */; };
 /* End PBXBuildFile section */
@@ -118,7 +118,7 @@
 		FFA0708924FF3FA200BC169D /* Downloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Downloader.h; sourceTree = "<group>"; };
 		FFA0708A24FF3FA200BC169D /* M3U8Parser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M3U8Parser.m; sourceTree = "<group>"; };
 		FFA0708B24FF3FA200BC169D /* TsDemuxer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TsDemuxer.h; sourceTree = "<group>"; };
-		FFA0708C24FF3FA200BC169D /* SYstemEx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYstemEx.h; sourceTree = "<group>"; };
+		FFA0708C24FF3FA200BC169D /* MOSISYstemEx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSISYstemEx.h; sourceTree = "<group>"; };
 		FFA0708D24FF3FA200BC169D /* TsDemuxer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TsDemuxer.mm; sourceTree = "<group>"; };
 		FFA0708E24FF3FA200BC169D /* LocalCacheHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalCacheHandler.h; sourceTree = "<group>"; };
 		FFA0709024FF3FA200BC169D /* h264.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = h264.h; sourceTree = "<group>"; };
@@ -126,20 +126,20 @@
 		FFA0709224FF3FA200BC169D /* ts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ts.h; sourceTree = "<group>"; };
 		FFA0709324FF3FA200BC169D /* ac3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ac3.h; sourceTree = "<group>"; };
 		FFA0709424FF3FA200BC169D /* ts.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ts.cpp; sourceTree = "<group>"; };
-		FFA0709724FF3FA200BC169D /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
-		FFA0709824FF3FA200BC169D /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
-		FFA0709924FF3FA200BC169D /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
-		FFA0709A24FF3FA200BC169D /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLRequestSerialization.h; sourceTree = "<group>"; };
-		FFA0709B24FF3FA200BC169D /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
-		FFA0709C24FF3FA200BC169D /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
-		FFA0709D24FF3FA200BC169D /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLResponseSerialization.h; sourceTree = "<group>"; };
-		FFA0709E24FF3FA200BC169D /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
-		FFA0709F24FF3FA200BC169D /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLRequestSerialization.m; sourceTree = "<group>"; };
-		FFA070A024FF3FA200BC169D /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
-		FFA070A124FF3FA200BC169D /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
-		FFA070A224FF3FA200BC169D /* AFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
-		FFA070A324FF3FA200BC169D /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
-		FFA070A424FF3FA200BC169D /* SYstemEx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYstemEx.m; sourceTree = "<group>"; };
+		FFA0709724FF3FA200BC169D /* MOSISecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSISecurityPolicy.h; sourceTree = "<group>"; };
+		FFA0709824FF3FA200BC169D /* MOSINetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSINetworkReachabilityManager.h; sourceTree = "<group>"; };
+		FFA0709924FF3FA200BC169D /* MOSIURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSIURLSessionManager.h; sourceTree = "<group>"; };
+		FFA0709A24FF3FA200BC169D /* MOSIURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSIURLRequestSerialization.h; sourceTree = "<group>"; };
+		FFA0709B24FF3FA200BC169D /* MOSIURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSIURLResponseSerialization.m; sourceTree = "<group>"; };
+		FFA0709C24FF3FA200BC169D /* MOSIHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSIHTTPSessionManager.m; sourceTree = "<group>"; };
+		FFA0709D24FF3FA200BC169D /* MOSIURLResponseSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSIURLResponseSerialization.h; sourceTree = "<group>"; };
+		FFA0709E24FF3FA200BC169D /* MOSIURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSIURLSessionManager.m; sourceTree = "<group>"; };
+		FFA0709F24FF3FA200BC169D /* MOSIURLRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSIURLRequestSerialization.m; sourceTree = "<group>"; };
+		FFA070A024FF3FA200BC169D /* MOSINetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSINetworking.h; sourceTree = "<group>"; };
+		FFA070A124FF3FA200BC169D /* MOSINetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSINetworkReachabilityManager.m; sourceTree = "<group>"; };
+		FFA070A224FF3FA200BC169D /* MOSISecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSISecurityPolicy.m; sourceTree = "<group>"; };
+		FFA070A324FF3FA200BC169D /* MOSIHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOSIHTTPSessionManager.h; sourceTree = "<group>"; };
+		FFA070A424FF3FA200BC169D /* MOSISYstemEx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOSISYstemEx.m; sourceTree = "<group>"; };
 		FFA070A524FF3FA200BC169D /* M3U8Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M3U8Parser.h; sourceTree = "<group>"; };
 		FFA070A624FF3FA200BC169D /* LocalCacheHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalCacheHandler.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -233,8 +233,8 @@
 				FFA070A624FF3FA200BC169D /* LocalCacheHandler.m */,
 				FFA070A524FF3FA200BC169D /* M3U8Parser.h */,
 				FFA0708A24FF3FA200BC169D /* M3U8Parser.m */,
-				FFA0708C24FF3FA200BC169D /* SYstemEx.h */,
-				FFA070A424FF3FA200BC169D /* SYstemEx.m */,
+				FFA0708C24FF3FA200BC169D /* MOSISYstemEx.h */,
+				FFA070A424FF3FA200BC169D /* MOSISYstemEx.m */,
 				FFA0708B24FF3FA200BC169D /* TsDemuxer.h */,
 				FFA0708D24FF3FA200BC169D /* TsDemuxer.mm */,
 				608AA27F24EBC256009A90DF /* TsHandler.h */,
@@ -283,19 +283,19 @@
 		FFA0709624FF3FA200BC169D /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
-				FFA0709724FF3FA200BC169D /* AFSecurityPolicy.h */,
-				FFA0709824FF3FA200BC169D /* AFNetworkReachabilityManager.h */,
-				FFA0709924FF3FA200BC169D /* AFURLSessionManager.h */,
-				FFA0709A24FF3FA200BC169D /* AFURLRequestSerialization.h */,
-				FFA0709B24FF3FA200BC169D /* AFURLResponseSerialization.m */,
-				FFA0709C24FF3FA200BC169D /* AFHTTPSessionManager.m */,
-				FFA0709D24FF3FA200BC169D /* AFURLResponseSerialization.h */,
-				FFA0709E24FF3FA200BC169D /* AFURLSessionManager.m */,
-				FFA0709F24FF3FA200BC169D /* AFURLRequestSerialization.m */,
-				FFA070A024FF3FA200BC169D /* AFNetworking.h */,
-				FFA070A124FF3FA200BC169D /* AFNetworkReachabilityManager.m */,
-				FFA070A224FF3FA200BC169D /* AFSecurityPolicy.m */,
-				FFA070A324FF3FA200BC169D /* AFHTTPSessionManager.h */,
+				FFA0709724FF3FA200BC169D /* MOSISecurityPolicy.h */,
+				FFA0709824FF3FA200BC169D /* MOSINetworkReachabilityManager.h */,
+				FFA0709924FF3FA200BC169D /* MOSIURLSessionManager.h */,
+				FFA0709A24FF3FA200BC169D /* MOSIURLRequestSerialization.h */,
+				FFA0709B24FF3FA200BC169D /* MOSIURLResponseSerialization.m */,
+				FFA0709C24FF3FA200BC169D /* MOSIHTTPSessionManager.m */,
+				FFA0709D24FF3FA200BC169D /* MOSIURLResponseSerialization.h */,
+				FFA0709E24FF3FA200BC169D /* MOSIURLSessionManager.m */,
+				FFA0709F24FF3FA200BC169D /* MOSIURLRequestSerialization.m */,
+				FFA070A024FF3FA200BC169D /* MOSINetworking.h */,
+				FFA070A124FF3FA200BC169D /* MOSINetworkReachabilityManager.m */,
+				FFA070A224FF3FA200BC169D /* MOSISecurityPolicy.m */,
+				FFA070A324FF3FA200BC169D /* MOSIHTTPSessionManager.h */,
 			);
 			path = AFNetworking;
 			sourceTree = "<group>";
@@ -308,21 +308,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF3E8A572509B85F0098FAF9 /* MPcmPlaYer.h in Headers */,
-				FFA070B524FF3FA200BC169D /* AFURLRequestSerialization.h in Headers */,
+				FFA070B524FF3FA200BC169D /* MOSIURLRequestSerialization.h in Headers */,
 				FFA070B024FF3FA200BC169D /* ac3.h in Headers */,
-				FFA070B224FF3FA200BC169D /* AFSecurityPolicy.h in Headers */,
+				FFA070B224FF3FA200BC169D /* MOSISecurityPolicy.h in Headers */,
 				608AA2D224ECD419009A90DF /* Error.h in Headers */,
 				608AA2D324ECD419009A90DF /* MPlaYer.h in Headers */,
-				FFA070BE24FF3FA200BC169D /* AFHTTPSessionManager.h in Headers */,
+				FFA070BE24FF3FA200BC169D /* MOSIHTTPSessionManager.h in Headers */,
 				FFA070A924FF3FA200BC169D /* TsDemuxer.h in Headers */,
 				608AA2E124ECD6AF009A90DF /* TsHandler.h in Headers */,
-				FFA070BB24FF3FA200BC169D /* AFNetworking.h in Headers */,
+				FFA070BB24FF3FA200BC169D /* MOSINetworking.h in Headers */,
 				608AA2E224ECD6AF009A90DF /* NSMutableArray+STKAudioPlayer.h in Headers */,
 				608AA2E324ECD6AF009A90DF /* STKAudioPlayer.h in Headers */,
 				608AA2E424ECD6AF009A90DF /* STKAutoRecoveringHTTPDataSource.h in Headers */,
 				FFA070C024FF3FA200BC169D /* M3U8Parser.h in Headers */,
-				FFA070B324FF3FA200BC169D /* AFNetworkReachabilityManager.h in Headers */,
-				FFA070B424FF3FA200BC169D /* AFURLSessionManager.h in Headers */,
+				FFA070B324FF3FA200BC169D /* MOSINetworkReachabilityManager.h in Headers */,
+				FFA070B424FF3FA200BC169D /* MOSIURLSessionManager.h in Headers */,
 				608AA2E524ECD6AF009A90DF /* STKCoreFoundationDataSource.h in Headers */,
 				FFA070A724FF3FA200BC169D /* Downloader.h in Headers */,
 				FFA070AD24FF3FA200BC169D /* h264.h in Headers */,
@@ -334,8 +334,8 @@
 				FFA070AF24FF3FA200BC169D /* ts.h in Headers */,
 				608AA2E924ECD6AF009A90DF /* STKLocalFileDataSource.h in Headers */,
 				608AA2EA24ECD6AF009A90DF /* STKMacro.h in Headers */,
-				FFA070AA24FF3FA200BC169D /* SYstemEx.h in Headers */,
-				FFA070B824FF3FA200BC169D /* AFURLResponseSerialization.h in Headers */,
+				FFA070AA24FF3FA200BC169D /* MOSISYstemEx.h in Headers */,
+				FFA070B824FF3FA200BC169D /* MOSIURLResponseSerialization.h in Headers */,
 				608AA2EB24ECD6AF009A90DF /* STKQueueEntry.h in Headers */,
 				608AA2EC24ECD6AF009A90DF /* STKSpinLock.h in Headers */,
 			);
@@ -401,27 +401,27 @@
 			files = (
 				FFA070A824FF3FA200BC169D /* M3U8Parser.m in Sources */,
 				608AA28124EBC256009A90DF /* TsHandler.m in Sources */,
-				FFA070BC24FF3FA200BC169D /* AFNetworkReachabilityManager.m in Sources */,
+				FFA070BC24FF3FA200BC169D /* MOSINetworkReachabilityManager.m in Sources */,
 				608AA25924EBC02B009A90DF /* STKDataSource.m in Sources */,
 				FFA070AB24FF3FA200BC169D /* TsDemuxer.mm in Sources */,
 				608AA25624EBC02B009A90DF /* STKAutoRecoveringHTTPDataSource.m in Sources */,
 				FFA070B124FF3FA200BC169D /* ts.cpp in Sources */,
-				FFA070BD24FF3FA200BC169D /* AFSecurityPolicy.m in Sources */,
+				FFA070BD24FF3FA200BC169D /* MOSISecurityPolicy.m in Sources */,
 				608AA25A24EBC02B009A90DF /* NSMutableArray+STKAudioPlayer.m in Sources */,
 				608AA25824EBC02B009A90DF /* STKDataSourceWrapper.m in Sources */,
 				608AA25524EBC02B009A90DF /* STKCoreFoundationDataSource.m in Sources */,
-				FFA070B924FF3FA200BC169D /* AFURLSessionManager.m in Sources */,
+				FFA070B924FF3FA200BC169D /* MOSIURLSessionManager.m in Sources */,
 				6070027824EA7E0F005EB7AD /* MPlaYer.m in Sources */,
-				FFA070BF24FF3FA200BC169D /* SYstemEx.m in Sources */,
+				FFA070BF24FF3FA200BC169D /* MOSISYstemEx.m in Sources */,
 				608AA25324EBC02B009A90DF /* STKHTTPDataSource.m in Sources */,
-				FFA070BA24FF3FA200BC169D /* AFURLRequestSerialization.m in Sources */,
+				FFA070BA24FF3FA200BC169D /* MOSIURLRequestSerialization.m in Sources */,
 				608AA25424EBC02B009A90DF /* STKLocalFileDataSource.m in Sources */,
 				FF3E8A562509B85F0098FAF9 /* MPcmPlaYer.m in Sources */,
 				608AA23B24EBA27D009A90DF /* Error.m in Sources */,
 				608AA25724EBC02B009A90DF /* STKAudioPlayer.m in Sources */,
-				FFA070B624FF3FA200BC169D /* AFURLResponseSerialization.m in Sources */,
+				FFA070B624FF3FA200BC169D /* MOSIURLResponseSerialization.m in Sources */,
 				FFA070C124FF3FA200BC169D /* LocalCacheHandler.m in Sources */,
-				FFA070B724FF3FA200BC169D /* AFHTTPSessionManager.m in Sources */,
+				FFA070B724FF3FA200BC169D /* MOSIHTTPSessionManager.m in Sources */,
 				608AA25224EBC02B009A90DF /* STKQueueEntry.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
