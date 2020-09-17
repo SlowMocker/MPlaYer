@@ -31,7 +31,7 @@
 }
 
 - (void) dealloc {
-    NSLog(@"\n\n\n**************************** MPlaYer dealloc!!! ****************************\n\n\n");
+    NSLog(@"\n*\n\n\nMPlaYer dealloc!!!\n\n\n*");
 }
 
 - (id) init {
@@ -56,6 +56,9 @@
                 ioData.mNumberChannels = channelsPerFrame;
                 ioData.mDataByteSize = bytesPerFrame * frameCount;
                 self.pcmCallback(ioData);
+            }
+            if (self.playerProgressCallback) {
+                self.playerProgressCallback(self.audioPlayer.progress / self.audioPlayer.duration);
             }
         }];
 
@@ -82,6 +85,9 @@
     else {
         _isHLS = NO;
         [self.audioPlayer playURL:url];
+        if (self.playerProgressCallback) {
+            self.playerProgressCallback(0);
+        }
     }
 }
 
@@ -205,4 +211,5 @@
 -(void) audioPlayer:(STKAudioPlayer*)audioPlayer unexpectedError:(STKAudioPlayerErrorCode)errorCode {
     NSLog(@"\n**** 【ERROR】 unexpectedError | %d", (int)errorCode);
 }
+
 @end

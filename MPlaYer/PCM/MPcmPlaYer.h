@@ -23,6 +23,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 #define kNotificationShouldFillAudioQueueBuffer @"kNotificationShouldFillAudioQueueBuffer"
 
+// 1. kBufferCount * kBufferSize == kSubBufferCount * kSubBufferSize
+// 2. kBufferSize 是 kSubBufferSize 的整数倍
+// 生产者使用
+#define kBufferCount 3
+#define kBufferSize (1024*1000) // 1000K
+// 消费者使用
+#define kSubBufferCount 60
+#define kSubBufferSize (1024*50) // 50K
+// kBufferCount == 3 时。如果大于 3 则依次递推
+#define kShouldFillDataCount0 20 // kSubBufferCount / (kBufferCount+0)
+#define kShouldFillDataCount1 40 // kSubBufferCount / (kBufferCount+1)
+
 @interface MPcmPlaYer : NSObject
 /// 当前播放信息标识
 /// 每次 prepare 都会重置
@@ -34,10 +46,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic , assign) BOOL isJustFetchPCM;
 /// PCM 数据独立回调
 @property (nonatomic , copy) void (^pcmCallback)(AudioBuffer ioData);
+/// 消耗数据长度回调，用于外部计算播放进度
+@property (nonatomic , copy) void (^didComsumeDataLengthCallback)(int dataLength);
+
 /// 所有的 queue buffer 全部为空
 /// 返回 YES 表示播放结束
 @property (nonatomic , copy) BOOL (^allBufferNullCallback)(void);
-/// 预加载
+/// 预加载（play 之前必调）
 - (void) prepareToPlay:(AudioStreamBasicDescription)asbd;
 /// 播放
 - (void) play;

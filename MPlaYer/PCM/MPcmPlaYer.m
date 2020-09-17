@@ -13,62 +13,86 @@ MPcmPlaYer *cPcmPlaYer = nil;
 @interface MPcmPlaYer()
 // asbd
 @property (nonatomic , assign) AudioStreamBasicDescription asbd;
-// 填充 buffer 同步锁
-@property (nonatomic , strong) NSLock *syncLock;
-// 播放文件 id
+// 同步锁
+@property (nonatomic , strong) NSLock *syncLock0;
+@property (nonatomic , strong) NSLock *syncLock1;
+// 播放文件标识
 @property (nonatomic , copy) NSString *sourceIdentifier;
 
 @property (nonatomic , assign) BOOL isRunning;
 @end
-
-#define kBufferCount 3
-// 一个 buffer 250K
-#define kBufferSize (1024*250)
-
 
 @implementation MPcmPlaYer
 {
     /// AudioQueue 实例
     AudioQueueRef _aqInstance;
     /// buffers
-    AudioQueueBufferRef _aqBuffers[kBufferCount];
+    AudioQueueBufferRef _aqBuffers[kSubBufferCount];
     
-    BOOL _forbbidCallback;
+    BOOL _forbidCallback;
+    
+    /// 已经填充过了一个大 buffer
+    BOOL _didCacheOneBigBuffer;
+    BOOL _playFlag;
 }
 
 - (id) init {
     self = [super init];
     if (self) {
         self.asbd = [self defaultAsbd];
-        self.syncLock = [[NSLock alloc]init];
+        self.syncLock0 = [[NSLock alloc]init];
+        self.syncLock1 = [[NSLock alloc]init];
+        
         cPcmPlaYer = self;
         
-        _forbbidCallback = NO;
+        _forbidCallback = NO;
+        _didCacheOneBigBuffer = NO;
+        _playFlag = NO;
     }
     return self;
 }
 
+
+/// AudioQueueBuffer 读取为空回调
+/// @param inUserData 用户数据
+/// @param inAQ buffer 所属 AudioQueue
+/// @param inBuffer 数据被读取完毕的 AudioQueueBuffer
 void aqBufferDidReadCallback(void * __nullable inUserData, AudioQueueRef inAQ, AudioQueueBufferRef inBuffer) {
+    [cPcmPlaYer.syncLock1 lock];
     
+    // progress 回调
+    if (cPcmPlaYer.didComsumeDataLengthCallback) {
+        cPcmPlaYer.didComsumeDataLengthCallback(inBuffer->mAudioDataByteSize);
+    }
+    
+    // buffer 数据不用重置，后续会被覆盖，只会读取被覆盖部分
 //    memset(inBuffer->mAudioData, 0, kBufferSize);
+    // buffer 有效数据标识重置
     inBuffer->mAudioDataByteSize = 0;
     
     if (cPcmPlaYer) {
+        
         if (cPcmPlaYer.allBufferNullCallback && [cPcmPlaYer buffersNULL]) {
             // 最后一次回调的时候，在外部将 cPcmPlaYer 释放了
             if (cPcmPlaYer.allBufferNullCallback()) {
+                [cPcmPlaYer.syncLock1 unlock];
                 return;
             }
         }
-        // 释放之后还在访问 cPcmPlaYer
-        if (cPcmPlaYer->_forbbidCallback) {
+        
+        if (cPcmPlaYer->_forbidCallback) {
+            [cPcmPlaYer.syncLock1 unlock];
             return;
         }
-        NSNotification *noti = [NSNotification notificationWithName:kNotificationShouldFillAudioQueueBuffer
-                                                             object:nil
-                                                           userInfo:@{@"sourceId": cPcmPlaYer.sourceIdentifier}];
-        [[NSNotificationCenter defaultCenter] postNotification:noti];
+        
+        if ([cPcmPlaYer shouldFillNewData]) {
+            NSNotification *noti = [NSNotification notificationWithName:kNotificationShouldFillAudioQueueBuffer
+                                                                 object:nil
+                                                               userInfo:@{@"sourceId": cPcmPlaYer.sourceIdentifier}];
+            [[NSNotificationCenter defaultCenter] postNotification:noti];
+        }
     }
+    [cPcmPlaYer.syncLock1 unlock];
 }
 
 void aqPropertyListenerCallback(void * __nullable inUserData, AudioQueueRef inAQ, AudioQueuePropertyID inID) {
@@ -91,13 +115,16 @@ void aqPropertyListenerCallback(void * __nullable inUserData, AudioQueueRef inAQ
 
 - (void) dealloc {
     [self dispose];
-    NSLog(@"\n\n\n*******************************************************************MPcmPlaYer dealloc!!! Happiness Maybe!!!\n\n\n*");
+    NSLog(@"\n*\n\n\nMPcmPlaYer dealloc!!! Happiness Maybe!!!\n\n\n*");
 }
 
 #pragma mark - public methods
 - (void) prepareToPlay:(AudioStreamBasicDescription)asbd {
     
-    _forbbidCallback = NO;
+    _forbidCallback = NO;
+    _playFlag = NO;
+    _didCacheOneBigBuffer = NO;
+    
     if (asbd.mSampleRate > 0 && asbd.mFormatID == kAudioFormatLinearPCM) {
         self.asbd = asbd;
     }
@@ -112,27 +139,32 @@ void aqPropertyListenerCallback(void * __nullable inUserData, AudioQueueRef inAQ
     // 2. 重置媒体标识
     self.sourceIdentifier = [NSString stringWithFormat:@"%lf", [NSDate date].timeIntervalSince1970];
     for (int i = 0; i < kBufferCount; i ++) {
-        if (!self->_aqBuffers[i] || self->_aqBuffers[i]->mAudioDataByteSize <= 0) {
-            NSNotification *noti = [NSNotification notificationWithName:kNotificationShouldFillAudioQueueBuffer
-                                                                 object:nil
-                                                               userInfo:@{@"sourceId": self.sourceIdentifier}];
-            [[NSNotificationCenter defaultCenter] postNotification:noti];
-        }
+        NSNotification *noti = [NSNotification notificationWithName:kNotificationShouldFillAudioQueueBuffer
+                                                             object:nil
+                                                           userInfo:@{@"sourceId": self.sourceIdentifier}];
+        [[NSNotificationCenter defaultCenter] postNotification:noti];
     }
 }
 
 /// buffer 填充接口
+/// 将生产者数据填充至 subBuffer 中
 - (OSStatus) enqueueAudioBuffer:(AudioBuffer)buffer {
-    [self.syncLock lock];
-    // 填充数据到 buffer
+    [self.syncLock0 lock];
+    
+    // 生产者提供 buffer 原始大小
+    int bigBufferSize = buffer.mDataByteSize;
+    // 还未读取大小
+    int bigBufferRemainSize = bigBufferSize;
+    // 还未读取的生产者 buffer
+    void* __nullable bigRemainBuffer = buffer.mData;
+    
     OSStatus status = 1;
-    for (int i = 0; i < kBufferCount; i ++) {
-        // 还未填充过数据
+    for (int i = 0; i < kSubBufferCount; i ++) {
         if (!_aqBuffers[i] || _aqBuffers[i]->mAudioDataByteSize <= 0) {
-            _aqBuffers[i]->mAudioDataByteSize = buffer.mDataByteSize;
+            _aqBuffers[i]->mAudioDataByteSize = bigBufferRemainSize > kSubBufferSize ? kSubBufferSize : bigBufferRemainSize;
             memcpy(_aqBuffers[i]->mAudioData,
-                   buffer.mData,
-                   buffer.mDataByteSize);
+                   bigRemainBuffer,
+                   _aqBuffers[i]->mAudioDataByteSize);
             
             OSStatus qErr;
             if (self.isJustFetchPCM) {
@@ -149,7 +181,7 @@ void aqPropertyListenerCallback(void * __nullable inUserData, AudioQueueRef inAQ
                 qErr = AudioQueueSetParameter(_aqInstance, kAudioQueueParam_Volume, 1);
             }
             if (qErr != noErr) {
-                NSLog(@"【ERROR AudioQueue 设置音量（%d）失败！！! %d",(int)self.isJustFetchPCM ,(int)qErr);
+                NSLog(@"【ERROR】AudioQueue 设置音量（%d）失败！！! %d",(int)self.isJustFetchPCM ,(int)qErr);
             }
             
             OSStatus aErr = AudioQueueEnqueueBuffer(_aqInstance, _aqBuffers[i], 0, NULL);
@@ -158,19 +190,36 @@ void aqPropertyListenerCallback(void * __nullable inUserData, AudioQueueRef inAQ
             }
             status = noErr;
             
-            break;
+            bigBufferRemainSize = bigBufferRemainSize - _aqBuffers[i]->mAudioDataByteSize;
+            bigRemainBuffer = bigRemainBuffer + _aqBuffers[i]->mAudioDataByteSize;
+            
+            if (bigBufferRemainSize <= 0) {
+                break;
+            }
         }
     }
-    [self.syncLock unlock];
+    
+    [self.syncLock0 unlock];
+    if (status == noErr) {
+        _didCacheOneBigBuffer = YES;
+        if (_didCacheOneBigBuffer && _playFlag) {
+            AudioQueueStart(_aqInstance, NULL);
+            _playFlag = NO;
+        }
+    }
     return status;
 }
 
 - (void) play {
-    _forbbidCallback = NO;
-    // AudioQueueStart 可以多次连续调用，无副作用
-    // 当前 AudioQueue 暂停后，在前台模式 AudioQueue 还有机会重启。比如被当前音乐打断，可以重启 AQ 恢复
-    // 但是如果是系统级，比如来电，重启 AQ 会返回错误码
-    AudioQueueStart(_aqInstance, NULL);
+    _forbidCallback = NO;
+    
+    if (_didCacheOneBigBuffer) {
+        AudioQueueStart(_aqInstance, NULL);
+        _playFlag = NO;
+    }
+    else {
+        _playFlag = YES;
+    }
 }
 
 - (void) pause {
@@ -178,11 +227,14 @@ void aqPropertyListenerCallback(void * __nullable inUserData, AudioQueueRef inAQ
 }
 
 - (void) resume {
+    // AudioQueueStart 可以多次连续调用，无副作用
+    // 当前 AudioQueue 暂停后，在前台模式 AudioQueue 还有机会重启。比如被当前音乐打断，可以重启 AQ 恢复
+    // 但是如果是系统级，比如来电，重启 AQ 会返回错误码
     AudioQueueStart(_aqInstance, NULL);
 }
 
 - (void) stop {
-    _forbbidCallback = YES;
+    _forbidCallback = YES;
     // 会触发 aqBufferDidReadCallback
     AudioQueueStop(_aqInstance, true);
     AudioQueueReset(_aqInstance);
@@ -198,7 +250,7 @@ void aqPropertyListenerCallback(void * __nullable inUserData, AudioQueueRef inAQ
 
 - (void) dispose {
     AudioQueueFlush(_aqInstance);
-    for(int i = 0; i < kBufferCount; i ++) {
+    for(int i = 0; i < kSubBufferCount; i ++) {
         int result =  AudioQueueFreeBuffer(_aqInstance, _aqBuffers[i]);
         if (result != 0) {
             NSLog(@"【ERROR】Audio Queue Buffer free Error!!! %d", result);
@@ -244,9 +296,9 @@ void aqPropertyListenerCallback(void * __nullable inUserData, AudioQueueRef inAQ
     }
     
     // 2. 创建缓冲数组
-    for(int i = 0; i < kBufferCount; i ++) {
+    for(int i = 0; i < kSubBufferCount; i ++) {
         OSStatus err =  AudioQueueAllocateBuffer(_aqInstance,
-                                                 kBufferSize,
+                                                 kSubBufferSize,
                                                  &_aqBuffers[i]);
         if (err != noErr) {
             NSLog(@"【ERROR】创建缓冲区数据错误！！！ %d",(int)err);
@@ -267,9 +319,25 @@ void aqPropertyListenerCallback(void * __nullable inUserData, AudioQueueRef inAQ
     }
 }
 
+
+/// 检测是否应该告诉生产者提供数据
+- (BOOL) shouldFillNewData {
+    int count = 0;
+    for(int i = 0; i < kSubBufferCount; i ++) {
+        if (_aqBuffers[i]->mAudioDataByteSize <= 0) {
+            count ++;
+        }
+    }
+    if (count == kShouldFillDataCount0 || count == kShouldFillDataCount1) {
+//        NSLog(@"\n*\ncount: %d\n*", count);
+        return YES;
+    }
+    return NO;
+}
+
 /// 检查队列中的 buffer 是否全空
 - (BOOL) buffersNULL {
-    for(int i = 0; i < kBufferCount; i ++) {
+    for(int i = 0; i < kSubBufferCount; i ++) {
         if (_aqBuffers[i]->mAudioDataByteSize > 0) {
             return NO;
         }
