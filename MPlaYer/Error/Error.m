@@ -2,8 +2,8 @@
 //  Error.m
 //  MPlaYer
 //
-//  Created by 吴文豪 on 2020/8/18.
-//  Copyright © 2020 吴文豪. All rights reserved.
+//  Created by wuwenhao on 2020/8/18.
+//  Copyright © 2020 MOSI. All rights reserved.
 //
 
 #import "Error.h"

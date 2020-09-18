@@ -2,8 +2,8 @@
 //  MPlaYer.h
 //  MPlaYer
 //
-//  Created by 吴文豪 on 2020/8/17.
-//  Copyright © 2020 吴文豪. All rights reserved.
+//  Created by wuwenhao on 2020/8/17.
+//  Copyright © 2020 MOSI. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

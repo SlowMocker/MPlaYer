@@ -2,8 +2,8 @@
 //  MPcmPlaYer.m
 //  QPlayAutoDemo
 //
-//  Created by iSmicro on 2020/8/30.
-//  Copyright © 2020 wuwenhao. All rights reserved.
+//  Created by wuwenhao on 2020/8/30.
+//  Copyright © 2020 MOSI. All rights reserved.
 //
 
 #import "MPcmPlaYer.h"
