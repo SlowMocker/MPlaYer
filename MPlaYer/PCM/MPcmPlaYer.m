@@ -11,12 +11,12 @@
 MPcmPlaYer *cPcmPlaYer = nil;
 
 @interface MPcmPlaYer()
-// asbd
+/// asbd
 @property (nonatomic , assign) AudioStreamBasicDescription asbd;
-// 同步锁
+/// 同步锁
 @property (nonatomic , strong) NSLock *syncLock0;
 @property (nonatomic , strong) NSLock *syncLock1;
-// 播放文件标识
+/// 播放文件标识
 @property (nonatomic , copy) NSString *sourceIdentifier;
 
 @property (nonatomic , assign) BOOL isRunning;
@@ -51,7 +51,6 @@ MPcmPlaYer *cPcmPlaYer = nil;
     }
     return self;
 }
-
 
 /// AudioQueueBuffer 读取为空回调
 /// @param inUserData 用户数据
@@ -244,10 +243,6 @@ void aqPropertyListenerCallback(void * __nullable inUserData, AudioQueueRef inAQ
     cPcmPlaYer = nil;
 }
 
-- (void) setAsbd:(AudioStreamBasicDescription)asbd {
-    _asbd = asbd;
-}
-
 - (void) dispose {
     AudioQueueFlush(_aqInstance);
     for(int i = 0; i < kSubBufferCount; i ++) {
@@ -319,7 +314,6 @@ void aqPropertyListenerCallback(void * __nullable inUserData, AudioQueueRef inAQ
     }
 }
 
-
 /// 检测是否应该告诉生产者提供数据
 - (BOOL) shouldFillNewData {
     int count = 0;
@@ -329,7 +323,6 @@ void aqPropertyListenerCallback(void * __nullable inUserData, AudioQueueRef inAQ
         }
     }
     if (count == kShouldFillDataCount0 || count == kShouldFillDataCount1) {
-//        NSLog(@"\n*\ncount: %d\n*", count);
         return YES;
     }
     return NO;

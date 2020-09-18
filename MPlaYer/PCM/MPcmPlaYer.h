@@ -38,8 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MPcmPlaYer : NSObject
 /// 当前播放信息标识
 /// 每次 prepare 都会重置
-@property (nonatomic , copy , readonly) NSString *sourceIdentifier;
-@property (nonatomic , assign , readonly) BOOL isRunning;
+//@property (nonatomic , copy , readonly) NSString *sourceIdentifier;
+//@property (nonatomic , assign , readonly) BOOL isRunning;
 @property (nonatomic , assign , readonly) AudioStreamBasicDescription asbd;
 
 /// 是否只是抓取 PCM
