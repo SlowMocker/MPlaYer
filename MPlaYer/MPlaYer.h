@@ -39,5 +39,7 @@ typedef NS_ENUM(NSInteger, MPlaYerStatus){
 - (void) pause;
 /// 停止
 - (void) stop;
+/// 当前只有 Himalaya 支持
+- (void) seekTo:(float)progress;
 @end
 NS_ASSUME_NONNULL_END

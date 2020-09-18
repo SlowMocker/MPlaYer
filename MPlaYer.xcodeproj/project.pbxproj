@@ -39,10 +39,11 @@
 		FF8A966A250F483B0041926E /* MPcmPlaYer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = FF3E8A552509B85F0098FAF9 /* MPcmPlaYer.h */; };
 		FF8A966B250F483B0041926E /* Error.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 608AA23924EBA27D009A90DF /* Error.h */; platformFilter = ios; };
 		FF8A966C250F483B0041926E /* MPlaYer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6070027624EA7E0F005EB7AD /* MPlaYer.h */; platformFilter = ios; };
+		FF8BDEB925145725001D8020 /* MOSISYstemEx.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = FFA0708C24FF3FA200BC169D /* MOSISYstemEx.h */; };
 		FFA070A724FF3FA200BC169D /* Downloader.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA0708924FF3FA200BC169D /* Downloader.h */; };
 		FFA070A824FF3FA200BC169D /* M3U8Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA0708A24FF3FA200BC169D /* M3U8Parser.m */; };
 		FFA070A924FF3FA200BC169D /* TsDemuxer.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA0708B24FF3FA200BC169D /* TsDemuxer.h */; };
-		FFA070AA24FF3FA200BC169D /* MOSISYstemEx.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA0708C24FF3FA200BC169D /* MOSISYstemEx.h */; };
+		FFA070AA24FF3FA200BC169D /* MOSISYstemEx.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA0708C24FF3FA200BC169D /* MOSISYstemEx.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FFA070AB24FF3FA200BC169D /* TsDemuxer.mm in Sources */ = {isa = PBXBuildFile; fileRef = FFA0708D24FF3FA200BC169D /* TsDemuxer.mm */; };
 		FFA070AC24FF3FA200BC169D /* LocalCacheHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA0708E24FF3FA200BC169D /* LocalCacheHandler.h */; };
 		FFA070AD24FF3FA200BC169D /* h264.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA0709024FF3FA200BC169D /* h264.h */; };
@@ -75,6 +76,7 @@
 			dstPath = include;
 			dstSubfolderSpec = 16;
 			files = (
+				FF8BDEB925145725001D8020 /* MOSISYstemEx.h in CopyFiles */,
 				FF8A966A250F483B0041926E /* MPcmPlaYer.h in CopyFiles */,
 				FF8A966B250F483B0041926E /* Error.h in CopyFiles */,
 				FF8A966C250F483B0041926E /* MPlaYer.h in CopyFiles */,
@@ -307,6 +309,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFA070AA24FF3FA200BC169D /* MOSISYstemEx.h in Headers */,
 				FF3E8A572509B85F0098FAF9 /* MPcmPlaYer.h in Headers */,
 				FFA070B524FF3FA200BC169D /* MOSIURLRequestSerialization.h in Headers */,
 				FFA070B024FF3FA200BC169D /* ac3.h in Headers */,
@@ -334,7 +337,6 @@
 				FFA070AF24FF3FA200BC169D /* ts.h in Headers */,
 				608AA2E924ECD6AF009A90DF /* STKLocalFileDataSource.h in Headers */,
 				608AA2EA24ECD6AF009A90DF /* STKMacro.h in Headers */,
-				FFA070AA24FF3FA200BC169D /* MOSISYstemEx.h in Headers */,
 				FFA070B824FF3FA200BC169D /* MOSIURLResponseSerialization.h in Headers */,
 				608AA2EB24ECD6AF009A90DF /* STKQueueEntry.h in Headers */,
 				608AA2EC24ECD6AF009A90DF /* STKSpinLock.h in Headers */,

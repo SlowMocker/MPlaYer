@@ -110,6 +110,16 @@
     [self.audioPlayer stop];
 }
 
+/// 当前只有 Himalaya 支持
+- (void) seekTo:(float)progress {
+    if (_isHLS) {
+        return;
+    }
+    else {
+        [self.audioPlayer seekToTime:self.audioPlayer.duration * progress];
+    }
+}
+
 - (void) setIsJustFetchPCM:(BOOL)justFetchPCM {
     _isJustFetchPCM = justFetchPCM;
     if (_isJustFetchPCM) {
