@@ -7,12 +7,10 @@
 //
 
 #import "TsDemuxer.h"
-#import "ts.h"
+#import "Demuxer.h"
 #import "LocalCacheHandler.h"
 #import "Downloader.h"
 #import "MOSISYstemEx.h"
-
-static double const UndefinedFPS = -1.0;
 
 @implementation TsDemuxer
 
@@ -62,71 +60,10 @@ static double const UndefinedFPS = -1.0;
 }
 
 + (void) demuxLocalTsFiles:(NSArray<NSURL *> *) tsURLs handler:(void (^)(NSURL *, NSURL *, Error *)) handler {
-
-    // 参数校验 0
-    if (tsURLs.count <= 0) {
-        handler(nil, nil, [Error paramError:@"参数错误"]);
-        return;
-    }
-    // 参数校验 1
-    [tsURLs enumerateObjectsUsingBlock:^(NSURL * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (![obj.absoluteString.lowercaseString containsString:@".ts"]) {
-            handler(nil, nil, [Error paramError:@"ts 文件格式错误"]);
-            return;
+    [Demuxer demuxLocalTsFiles:tsURLs dir:[LocalCacheHandler mosiLinkCacheTsDir] handler:^(NSURL * _Nonnull audioURL, NSURL * _Nonnull videoURL, NSError * _Nonnull error) {
+        if (handler) {
+            handler(audioURL, videoURL, [Error errorFromNSError:error]);
         }
     }];
-
-    // demux
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
-        dispatch_async(queue, ^(void) {
-
-            int demuxStatus = 0;
-            // TS 解封包存储路径
-            NSURL *cacheTsDirURL = [NSURL fileURLWithPath:[LocalCacheHandler mosiLinkCacheTsDir]];
-            double video_fps = UndefinedFPS;
-
-            ts::demuxer demuxer;
-            demuxer.parse_only = false;
-            demuxer.es_parse = false;
-            demuxer.dump = 0;
-            demuxer.av_only = false;
-            demuxer.channel = 0;
-            demuxer.pes_output = false;
-            demuxer.prefix = [[[NSProcessInfo processInfo] globallyUniqueString] UTF8String];
-            demuxer.dst = [[cacheTsDirURL path] cStringUsingEncoding:[NSString defaultCStringEncoding]];
-
-            for (int i = 0; i < tsURLs.count; i ++) {
-                demuxStatus += demuxer.demux_file([[tsURLs[i] path] UTF8String], &video_fps);
-            }
-
-            NSString *fileName = [NSString stringWithFormat:@"%s",demuxer.prefix.c_str()];
-            NSString *audioType = [NSString stringWithFormat:@"%s",demuxer.type()];
-
-            dispatch_async(dispatch_get_main_queue(), ^(void) {
-                // demux success
-                if (demuxStatus == 0) {
-
-                    NSString *audioFileName = [NSString stringWithFormat:@"%@%@",fileName, audioType];
-                    NSString *audioPath = [cacheTsDirURL.path stringByAppendingPathComponent:audioFileName];
-                    NSURL *returnAudioURL = [NSURL fileURLWithPath:audioPath];
-
-                    NSURL *returnVideoURL = nil;
-                    if (video_fps != UndefinedFPS) {
-                        NSString *videoFileName = [NSString stringWithFormat:@"%@h264",fileName];
-                        NSString *videoPath = [cacheTsDirURL.path stringByAppendingPathComponent:videoFileName];
-                        returnVideoURL = [NSURL fileURLWithPath:videoPath];
-                    }
-
-                    handler(returnAudioURL, returnVideoURL, [Error success]);
-                }
-                else {
-                    handler(nil, nil, [Error demuxError:@"ts 解封包失败"]);
-                }
-
-                [tsURLs enumerateObjectsUsingBlock:^(NSURL * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    [[NSFileManager defaultManager] removeItemAtURL:obj error:nil];
-                }];
-            });
-        });
 }
 @end

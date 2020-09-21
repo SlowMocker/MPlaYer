@@ -204,7 +204,9 @@
 }
 /// Raised when an item has finished playing
 -(void) audioPlayer:(STKAudioPlayer*)audioPlayer didFinishPlayingQueueItemId:(NSObject*)queueItemId withReason:(STKAudioPlayerStopReason)stopReason andProgress:(double)progress andDuration:(double)duration {
-    if (self.playerStatusCallback && stopReason == STKAudioPlayerStopReasonEof) self.playerStatusCallback(MPlaYerStatusEND);
+    if (self.playerStatusCallback && (stopReason == STKAudioPlayerStopReasonNone || stopReason == STKAudioPlayerStopReasonEof)) {
+        self.playerStatusCallback(MPlaYerStatusEND);
+    }
     /* 当 id 正常播放结束时的打印
      **** didFinishPlayingQueueItemId
      id : http://music.163.com/song/media/outer/url?id=569212211.mp3
@@ -212,7 +214,7 @@
      progress : 275.325964
      duration : 0.000000
      */
-    if (_isHLS) {
+    if (_isHLS && (stopReason == STKAudioPlayerStopReasonNone || stopReason == STKAudioPlayerStopReasonEof)) {
         [self.tsHandler start];
     }
     NSLog(@"\n**** didFinishPlayingQueueItemId \n id : %@ \n stopReason : %d \n progress : %lf \n duration : %lf",queueItemId, (int)stopReason, progress, duration);
