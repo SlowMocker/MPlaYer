@@ -165,22 +165,12 @@ void aqPropertyListenerCallback(void * __nullable inUserData, AudioQueueRef inAQ
                    bigRemainBuffer,
                    _aqBuffers[i]->mAudioDataByteSize);
             
-            OSStatus qErr;
-            if (self.isJustFetchPCM) {
-                qErr = AudioQueueSetParameter(_aqInstance, kAudioQueueParam_Volume, 0);
-                if (self.pcmCallback) {
-                    AudioBuffer ioData;
-                    ioData.mData = _aqBuffers[i]->mAudioData;
-                    ioData.mNumberChannels = self.asbd.mChannelsPerFrame;
-                    ioData.mDataByteSize = _aqBuffers[i]->mAudioDataByteSize;
-                    self.pcmCallback(ioData);
-                }
-            }
-            else {
-                qErr = AudioQueueSetParameter(_aqInstance, kAudioQueueParam_Volume, 1);
-            }
-            if (qErr != noErr) {
-                NSLog(@"【ERROR】AudioQueue 设置音量（%d）失败！！! %d",(int)self.isJustFetchPCM ,(int)qErr);
+            if (self.pcmCallback) {
+                AudioBuffer ioData;
+                ioData.mData = _aqBuffers[i]->mAudioData;
+                ioData.mNumberChannels = self.asbd.mChannelsPerFrame;
+                ioData.mDataByteSize = _aqBuffers[i]->mAudioDataByteSize;
+                self.pcmCallback(ioData);
             }
             
             OSStatus aErr = AudioQueueEnqueueBuffer(_aqInstance, _aqBuffers[i], 0, NULL);
@@ -207,6 +197,14 @@ void aqPropertyListenerCallback(void * __nullable inUserData, AudioQueueRef inAQ
         }
     }
     return status;
+}
+
+- (void) setIsJustFetchPCM:(BOOL)isJustFetchPCM {
+    _isJustFetchPCM = isJustFetchPCM;
+    OSStatus qErr = AudioQueueSetParameter(_aqInstance, kAudioQueueParam_Volume, _isJustFetchPCM ? 0 : 1);
+    if (qErr != noErr) {
+        NSLog(@"【ERROR】AudioQueue 设置音量（%d）失败！！! %d",(int)self.isJustFetchPCM ,(int)qErr);
+    }
 }
 
 - (void) play {
