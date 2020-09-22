@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 清除 TS 缓存
 + (void) cleanTsCache;
 /// 创建一个唯一的 Cache Path
-+ (NSString *) uniqueCacheTsPath;
+//+ (NSString *) uniqueCacheTsPath;
 /// 创建一个唯一的临时 Path
 + (NSString *) uniqueTempTsPath;
 

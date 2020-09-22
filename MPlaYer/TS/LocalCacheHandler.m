@@ -29,12 +29,12 @@
     }
 }
 
-+ (NSString *) uniqueCacheTsPath {
-    NSString *path = [[self mosiLinkCacheTsDir] stringByAppendingPathComponent:[self udid]];
-    NSFileManager *fm = [NSFileManager defaultManager];
-    [fm createDirectoryAtPath:path withIntermediateDirectories:NO attributes:nil error:nil];
-    return path;
-}
+//+ (NSString *) uniqueCacheTsPath {
+//    NSString *path = [[self mosiLinkCacheTsDir] stringByAppendingPathComponent:[self udid]];
+//    NSFileManager *fm = [NSFileManager defaultManager];
+//    [fm createDirectoryAtPath:path withIntermediateDirectories:NO attributes:nil error:nil];
+//    return path;
+//}
 
 + (NSString *) uniqueTempTsPath {
     NSString *path = [[self mosiLinkTempTsDir] stringByAppendingPathComponent:[self udid]];
@@ -67,32 +67,32 @@
 }
 
 /// 在 Cache 文件夹中的 root 文件夹
-+ (NSString *) mosiLinkCacheRootDir {
-    NSString *cacheDir = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *mosiCacheDir = [NSString stringWithFormat:@"%@/MOSILINK", cacheDir];
-
-    NSFileManager *fm = [NSFileManager defaultManager];
-    BOOL isDir = NO;
-    if (![fm fileExistsAtPath:mosiCacheDir isDirectory:&isDir]) {
-        [fm createDirectoryAtPath:mosiCacheDir withIntermediateDirectories:NO attributes:nil error:nil];
-    }
-
-    return mosiCacheDir;
-}
+//+ (NSString *) mosiLinkCacheRootDir {
+//    NSString *cacheDir = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+//    NSString *mosiCacheDir = [NSString stringWithFormat:@"%@/MOSILINK", cacheDir];
+//
+//    NSFileManager *fm = [NSFileManager defaultManager];
+//    BOOL isDir = NO;
+//    if (![fm fileExistsAtPath:mosiCacheDir isDirectory:&isDir]) {
+//        [fm createDirectoryAtPath:mosiCacheDir withIntermediateDirectories:NO attributes:nil error:nil];
+//    }
+//
+//    return mosiCacheDir;
+//}
 
 /// 在 Document 文件夹中的 root 文件夹
-+ (NSString *) mosiLinkDocRootDir {
-    NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *mosiDocDir = [NSString stringWithFormat:@"%@/MOSILINK", docDir];
-
-    NSFileManager *fm = [NSFileManager defaultManager];
-    BOOL isDir = NO;
-    if (![fm fileExistsAtPath:mosiDocDir isDirectory:&isDir]) {
-        [fm createDirectoryAtPath:mosiDocDir withIntermediateDirectories:NO attributes:nil error:nil];
-    }
-
-    return mosiDocDir;
-}
+//+ (NSString *) mosiLinkDocRootDir {
+//    NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+//    NSString *mosiDocDir = [NSString stringWithFormat:@"%@/MOSILINK", docDir];
+//
+//    NSFileManager *fm = [NSFileManager defaultManager];
+//    BOOL isDir = NO;
+//    if (![fm fileExistsAtPath:mosiDocDir isDirectory:&isDir]) {
+//        [fm createDirectoryAtPath:mosiDocDir withIntermediateDirectories:NO attributes:nil error:nil];
+//    }
+//
+//    return mosiDocDir;
+//}
 
 /// 在 Temp 文件夹中的 root 文件夹
 + (NSString *) mosiLinkTempRootDir {
