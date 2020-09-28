@@ -22,7 +22,7 @@
         return nil;
     }
     Error *error = [[Error alloc]init];
-    error.code = [NSString stringWithFormat:@"MPlaYer_Error_%ld", err.code];
+    error.code = [NSString stringWithFormat:@"MPlaYer_Error_%ld", (long)err.code];
     error.localizedDescription = err.localizedDescription;
     return error;
 }
