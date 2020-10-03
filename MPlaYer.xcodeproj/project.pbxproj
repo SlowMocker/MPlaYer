@@ -12,45 +12,25 @@
 		608AA28124EBC256009A90DF /* TsHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 608AA28024EBC256009A90DF /* TsHandler.m */; };
 		608AA2D224ECD419009A90DF /* Error.h in Headers */ = {isa = PBXBuildFile; fileRef = 608AA23924EBA27D009A90DF /* Error.h */; platformFilter = ios; settings = {ATTRIBUTES = (Public, ); }; };
 		608AA2D324ECD419009A90DF /* MPlaYer.h in Headers */ = {isa = PBXBuildFile; fileRef = 6070027624EA7E0F005EB7AD /* MPlaYer.h */; platformFilter = ios; settings = {ATTRIBUTES = (Public, ); }; };
-		608AA2E124ECD6AF009A90DF /* TsHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 608AA27F24EBC256009A90DF /* TsHandler.h */; platformFilter = ios; };
 		608AA2F324ECF289009A90DF /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 608AA2F224ECF289009A90DF /* AudioToolbox.framework */; platformFilter = ios; };
 		FF327D112518717500036C4D /* libStreamingKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF327D052518717500036C4D /* libStreamingKit.a */; platformFilter = ios; };
-		FF327D122518717600036C4D /* STKHTTPDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = FF327D062518717500036C4D /* STKHTTPDataSource.h */; platformFilter = ios; };
-		FF327D132518717600036C4D /* STKCoreFoundationDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = FF327D072518717500036C4D /* STKCoreFoundationDataSource.h */; platformFilter = ios; };
-		FF327D142518717600036C4D /* STKMacro.h in Headers */ = {isa = PBXBuildFile; fileRef = FF327D082518717500036C4D /* STKMacro.h */; platformFilter = ios; };
-		FF327D152518717600036C4D /* STKQueueEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = FF327D092518717500036C4D /* STKQueueEntry.h */; platformFilter = ios; };
-		FF327D162518717600036C4D /* STKSpinLock.h in Headers */ = {isa = PBXBuildFile; fileRef = FF327D0A2518717500036C4D /* STKSpinLock.h */; platformFilter = ios; };
-		FF327D172518717600036C4D /* STKAutoRecoveringHTTPDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = FF327D0B2518717500036C4D /* STKAutoRecoveringHTTPDataSource.h */; platformFilter = ios; };
-		FF327D182518717600036C4D /* NSMutableArray+STKAudioPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = FF327D0C2518717500036C4D /* NSMutableArray+STKAudioPlayer.h */; platformFilter = ios; };
-		FF327D192518717600036C4D /* STKDataSourceWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = FF327D0D2518717500036C4D /* STKDataSourceWrapper.h */; platformFilter = ios; };
-		FF327D1A2518717600036C4D /* STKLocalFileDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = FF327D0E2518717500036C4D /* STKLocalFileDataSource.h */; platformFilter = ios; };
-		FF327D1B2518717600036C4D /* STKAudioPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = FF327D0F2518717500036C4D /* STKAudioPlayer.h */; platformFilter = ios; };
-		FF327D1C2518717600036C4D /* STKDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = FF327D102518717500036C4D /* STKDataSource.h */; platformFilter = ios; };
-		FF327D572518785500036C4D /* MOSIURLSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = FF327D4E2518785500036C4D /* MOSIURLSessionManager.h */; platformFilter = ios; };
-		FF327D582518785500036C4D /* MOSISYstemEx.h in Headers */ = {isa = PBXBuildFile; fileRef = FF327D4F2518785500036C4D /* MOSISYstemEx.h */; platformFilter = ios; };
-		FF327D592518785500036C4D /* MOSIURLResponseSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = FF327D502518785500036C4D /* MOSIURLResponseSerialization.h */; platformFilter = ios; };
-		FF327D5A2518785500036C4D /* MOSIURLRequestSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = FF327D512518785500036C4D /* MOSIURLRequestSerialization.h */; platformFilter = ios; };
 		FF327D5B2518785500036C4D /* libMOSINetworking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF327D522518785500036C4D /* libMOSINetworking.a */; platformFilter = ios; };
-		FF327D5C2518785500036C4D /* MOSINetworkReachabilityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = FF327D532518785500036C4D /* MOSINetworkReachabilityManager.h */; platformFilter = ios; };
-		FF327D5D2518785500036C4D /* MOSISecurityPolicy.h in Headers */ = {isa = PBXBuildFile; fileRef = FF327D542518785500036C4D /* MOSISecurityPolicy.h */; platformFilter = ios; };
-		FF327D5E2518785500036C4D /* MOSIHTTPSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = FF327D552518785500036C4D /* MOSIHTTPSessionManager.h */; platformFilter = ios; };
-		FF327D5F2518785500036C4D /* MOSINetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = FF327D562518785500036C4D /* MOSINetworking.h */; platformFilter = ios; };
 		FF3E8A562509B85F0098FAF9 /* MPcmPlaYer.m in Sources */ = {isa = PBXBuildFile; fileRef = FF3E8A542509B85F0098FAF9 /* MPcmPlaYer.m */; };
 		FF3E8A572509B85F0098FAF9 /* MPcmPlaYer.h in Headers */ = {isa = PBXBuildFile; fileRef = FF3E8A552509B85F0098FAF9 /* MPcmPlaYer.h */; platformFilter = ios; settings = {ATTRIBUTES = (Public, ); }; };
 		FF57685F2518ADF100C4A409 /* libTsDemuxer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF57685D2518ADF100C4A409 /* libTsDemuxer.a */; platformFilter = ios; };
-		FF5768602518ADF100C4A409 /* Demuxer.h in Headers */ = {isa = PBXBuildFile; fileRef = FF57685E2518ADF100C4A409 /* Demuxer.h */; };
+		FF6D7A1025280A6A001F4186 /* Downloader.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA0708924FF3FA200BC169D /* Downloader.h */; };
+		FF6D7A1125280A6A001F4186 /* LocalCacheHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA0708E24FF3FA200BC169D /* LocalCacheHandler.h */; };
+		FF6D7A1225280A6A001F4186 /* M3U8Parser.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA070A524FF3FA200BC169D /* M3U8Parser.h */; };
+		FF6D7A1325280A6A001F4186 /* TsDemuxer.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA0708B24FF3FA200BC169D /* TsDemuxer.h */; };
+		FF6D7A1425280A6A001F4186 /* TsHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 608AA27F24EBC256009A90DF /* TsHandler.h */; };
 		FF8A966A250F483B0041926E /* MPcmPlaYer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = FF3E8A552509B85F0098FAF9 /* MPcmPlaYer.h */; platformFilter = ios; };
 		FF8A966B250F483B0041926E /* Error.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 608AA23924EBA27D009A90DF /* Error.h */; platformFilter = ios; };
 		FF8A966C250F483B0041926E /* MPlaYer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6070027624EA7E0F005EB7AD /* MPlaYer.h */; platformFilter = ios; };
 		FF8BDEB925145725001D8020 /* MOSISYstemEx.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = FFA0708C24FF3FA200BC169D /* MOSISYstemEx.h */; platformFilter = ios; };
-		FFA070A724FF3FA200BC169D /* Downloader.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA0708924FF3FA200BC169D /* Downloader.h */; platformFilter = ios; };
 		FFA070A824FF3FA200BC169D /* M3U8Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA0708A24FF3FA200BC169D /* M3U8Parser.m */; };
-		FFA070A924FF3FA200BC169D /* TsDemuxer.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA0708B24FF3FA200BC169D /* TsDemuxer.h */; platformFilter = ios; };
 		FFA070AA24FF3FA200BC169D /* MOSISYstemEx.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA0708C24FF3FA200BC169D /* MOSISYstemEx.h */; platformFilter = ios; settings = {ATTRIBUTES = (Public, ); }; };
 		FFA070AB24FF3FA200BC169D /* TsDemuxer.mm in Sources */ = {isa = PBXBuildFile; fileRef = FFA0708D24FF3FA200BC169D /* TsDemuxer.mm */; };
-		FFA070AC24FF3FA200BC169D /* LocalCacheHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA0708E24FF3FA200BC169D /* LocalCacheHandler.h */; platformFilter = ios; };
 		FFA070BF24FF3FA200BC169D /* MOSISYstemEx.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA070A424FF3FA200BC169D /* MOSISYstemEx.m */; };
-		FFA070C024FF3FA200BC169D /* M3U8Parser.h in Headers */ = {isa = PBXBuildFile; fileRef = FFA070A524FF3FA200BC169D /* M3U8Parser.h */; platformFilter = ios; };
 		FFA070C124FF3FA200BC169D /* LocalCacheHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA070A624FF3FA200BC169D /* LocalCacheHandler.m */; };
 /* End PBXBuildFile section */
 
@@ -265,35 +245,15 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF327D5C2518785500036C4D /* MOSINetworkReachabilityManager.h in Headers */,
-				FF327D122518717600036C4D /* STKHTTPDataSource.h in Headers */,
-				FF327D142518717600036C4D /* STKMacro.h in Headers */,
 				FFA070AA24FF3FA200BC169D /* MOSISYstemEx.h in Headers */,
-				FF327D5E2518785500036C4D /* MOSIHTTPSessionManager.h in Headers */,
-				FF327D172518717600036C4D /* STKAutoRecoveringHTTPDataSource.h in Headers */,
-				FF327D5F2518785500036C4D /* MOSINetworking.h in Headers */,
-				FF327D582518785500036C4D /* MOSISYstemEx.h in Headers */,
-				FF327D592518785500036C4D /* MOSIURLResponseSerialization.h in Headers */,
+				FF6D7A1025280A6A001F4186 /* Downloader.h in Headers */,
+				FF6D7A1125280A6A001F4186 /* LocalCacheHandler.h in Headers */,
+				FF6D7A1225280A6A001F4186 /* M3U8Parser.h in Headers */,
+				FF6D7A1325280A6A001F4186 /* TsDemuxer.h in Headers */,
+				FF6D7A1425280A6A001F4186 /* TsHandler.h in Headers */,
 				FF3E8A572509B85F0098FAF9 /* MPcmPlaYer.h in Headers */,
-				FF327D132518717600036C4D /* STKCoreFoundationDataSource.h in Headers */,
 				608AA2D224ECD419009A90DF /* Error.h in Headers */,
 				608AA2D324ECD419009A90DF /* MPlaYer.h in Headers */,
-				FF327D162518717600036C4D /* STKSpinLock.h in Headers */,
-				FF327D572518785500036C4D /* MOSIURLSessionManager.h in Headers */,
-				FFA070A924FF3FA200BC169D /* TsDemuxer.h in Headers */,
-				FF327D192518717600036C4D /* STKDataSourceWrapper.h in Headers */,
-				608AA2E124ECD6AF009A90DF /* TsHandler.h in Headers */,
-				FF327D1A2518717600036C4D /* STKLocalFileDataSource.h in Headers */,
-				FF327D5A2518785500036C4D /* MOSIURLRequestSerialization.h in Headers */,
-				FF327D152518717600036C4D /* STKQueueEntry.h in Headers */,
-				FFA070C024FF3FA200BC169D /* M3U8Parser.h in Headers */,
-				FF327D182518717600036C4D /* NSMutableArray+STKAudioPlayer.h in Headers */,
-				FFA070A724FF3FA200BC169D /* Downloader.h in Headers */,
-				FF5768602518ADF100C4A409 /* Demuxer.h in Headers */,
-				FFA070AC24FF3FA200BC169D /* LocalCacheHandler.h in Headers */,
-				FF327D1B2518717600036C4D /* STKAudioPlayer.h in Headers */,
-				FF327D5D2518785500036C4D /* MOSISecurityPolicy.h in Headers */,
-				FF327D1C2518717600036C4D /* STKDataSource.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
